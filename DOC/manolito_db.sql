@@ -1,18 +1,20 @@
-/*  Usuario: manolito_db
-    Password: manolito
-    Conexión: manolito_db
-*/
+CREATE TABLE Permisos(
+    nombre VARCHAR2(15) NOT NULL PRIMARY KEY
+);
 
-
-CREATE TABLE Empleado(das VARCHAR2 NOT NULL PRIMARY KEY,
-                    password VARCHAR2 NOT NULL,
-                    nombre VARCHAR2 NOT NULL,
-                    apellido VARCHAR2,
-                    email VARCHAR2 NULL,
-                    estado CHAR NOT NULL);
+CREATE TABLE Empleados(das VARCHAR2(15) NOT NULL PRIMARY KEY,
+                    password VARCHAR2(20) NOT NULL,
+                    nombre VARCHAR2(20) NOT NULL,
+                    apellido VARCHAR2(40) NOT NULL,
+                    email VARCHAR2(40) NULL,
+                    estado CHAR NOT NULL,
+                    permiso VARCHAR(15) NOT NULL,
+                    CONSTRAINT FK_PermisoEmpleado FOREIGN KEY (permiso)
+                    REFERENCES Permisos(nombre)
+                    );
                     
                     
-CREATE TABLE Tarea(nombre VARCHAR2 NOT NULL PRIMARY KEY,
-                    descripcion VARCHAR2 NOT NULL PRIMARY KEY,
-                    estado BOOLEAN DEFAULT 0 NOT NULL);
-                    
+CREATE TABLE Tareas(
+                    nombre VARCHAR2(15) NOT NULL PRIMARY KEY,
+                    descripcion VARCHAR2(50) NOT NULL,
+                    estado CHAR NOT NULL);/*No me ha aceptado BOOLEAN como tipo de dato*/
