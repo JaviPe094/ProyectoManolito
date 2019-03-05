@@ -19,8 +19,8 @@ public class Estado implements Serializable {
 
 	@Id
 	@OneToMany(mappedBy="Estado")
-	@Column(name="estado")
-	private char estado;
+	@Column(name="ESTADO")
+	private char est;
 	
 	@Column(name="descipcion")
 	private String descripcion;
@@ -32,14 +32,14 @@ public class Estado implements Serializable {
 	 * @return the estado
 	 */
 	public char getEstado() {
-		return estado;
+		return est;
 	}
 
 	/**
 	 * @param estado the estado to set
 	 */
 	public void setEstado(char estado) {
-		this.estado = estado;
+		this.est = estado;
 	}
 
 	/**
@@ -54,6 +54,13 @@ public class Estado implements Serializable {
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Estado [est=" + est + ", descripcion=" + descripcion + "]";
 	}
 	
 	

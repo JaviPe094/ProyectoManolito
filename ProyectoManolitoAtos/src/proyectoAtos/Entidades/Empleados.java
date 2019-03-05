@@ -35,7 +35,7 @@ public class Empleados implements Serializable {
 	private String email;
 	
 	@ManyToOne
-	@JoinColumn(name = "est")
+	@JoinColumn(name = "estado")
 	private Estado est;
 	
 	@ManyToOne
@@ -47,7 +47,7 @@ public class Empleados implements Serializable {
 		
 	}
 
-	public Empleados(String das, String password, String nombre, String apellido, String email, char est,
+	public Empleados(String das, String password, String nombre, String apellido, String email, Estado est,
 			Permisos per) {
 		super();
 		this.das = das;
@@ -99,11 +99,11 @@ public class Empleados implements Serializable {
 		this.email = email;
 	}
 
-	public char getEstado() {
+	public Estado getEstado() {
 		return est;
 	}
 
-	public void setEstado(char est) {
+	public void setEstado(Estado est) {
 		this.est = est;
 	}
 

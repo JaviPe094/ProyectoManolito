@@ -4,6 +4,7 @@
 		<class>proyectoAtos.Entidades.Empleados</class>
 		<class>proyectoAtos.Entidades.Tareas</class>
 		<class>proyectoAtos.Entidades.Permisos</class>
+		<class>proyectoAtos.Entidades.Estado</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
