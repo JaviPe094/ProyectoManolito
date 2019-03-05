@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,23 +27,23 @@ td {
 }
 
 form {
-	margin-left: 590px;
+	margin-left: 10px;
 }
 </style>
 </head>
 
 <body>
-	<c:if test="#{msg != ''}">
-		 	<%-- Mostrar valor atributo --%>
-		 	<h3>${msg}</h3>
-		 </c:if>
+	<c:if test="${msg != null}">
+	 	<%-- Mostrar valor atributo --%>
+	 	<h3>${msg}</h3>
+	</c:if>
 	<!--  <h1 style="text-align: center">Login</h1>-->
 	<form action="LoginEmpleados" method="post">
 
 		<table width="30%" border="0">
 			<tr>
-				<td><label for="usuario">Usuario: </label></td>
-				<td><input type="text" name="usuario" id="usuario"></td>
+				<td><label for="usuario">DAS: </label></td>
+				<td><input type="text" name="das" id="das"></td>
 			</tr>
 			<tr>
 				<td><label for="contra">Contraseña: </label></td>
