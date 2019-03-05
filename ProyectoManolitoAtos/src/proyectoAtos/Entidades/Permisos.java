@@ -24,4 +24,5 @@ public class Permisos implements Serializable {
 	public Permisos() {
 		
 	}
+	
 }

@@ -9,8 +9,25 @@ public class TestDAO {
 		// TODO Auto-generated method stub
 		EmpleadoDAO edao=new EmpleadoDAOImpl();
 		TareasDAO tdao=new TareasDAOImpl();
+		PermisosDAO pdao=new PermisosDAOImpl();
+		
+		Permisos per=pdao.read("Administrador");
 		
 		Empleados emp=edao.read("00a00b00c");
+		
+		emp=new Empleados("001002003", "prueba2", "prueba2", "prueba23", "prueba2@pr.pr",per);
+		
+		edao.create(emp);
+		
+		System.out.println(edao.read("001002003"));
+		
+		emp.setNombre("Javier");
+		
+		edao.update(emp);
+		
+		System.out.println(edao.read("001002003"));
+		
+		edao.delete("001002003");
 		
 		System.out.println(emp);
 	}

@@ -90,6 +90,8 @@ private EntityManagerFactory emf = null;
 			
 			em.remove(emp);
 			
+			em.getTransaction().commit();
+			
 		} finally {
 			
 			if (em != null)
