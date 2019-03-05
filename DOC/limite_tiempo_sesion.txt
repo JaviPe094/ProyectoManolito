@@ -1,0 +1,14 @@
+Poniendo un tiempo límite de sesión:
+
+1. Dentro de web.xml:
+
+    <web-app ...>
+	    <session-config>
+		    <session-timeout>20</session-timeout>
+	    </session-config>
+    </web-app>
+    
+2. Utilizando HttpSession (Con spring se puede hacer dentro del @Controller, concretamente dentro del @RequestMapping) https://stackoverflow.com/questions/17145526/httpsession-management-in-springmvc
+
+    HttpSession session = request.getSession();
+    session.setMaxInactiveInterval(20*60);
