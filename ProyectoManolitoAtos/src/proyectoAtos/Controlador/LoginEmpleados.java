@@ -51,18 +51,15 @@ public class LoginEmpleados extends HttpServlet {
 		
 		Empleados userLogin = dao.read(user);
 		
-		
 		if (userLogin == null) {
-			
+				
 			request.setAttribute("msg", "Campos inválidos");
-			response.sendRedirect("formulario_login.html");
+			response.sendRedirect("formulario_login.jsp");
+			return;
 			
 		}
 		
-		
-		if (validarLogin(userLogin.getPassword(), pass)) {
-			
-			System.out.println(userLogin.getEstado());
+		if (userLogin.getPassword().equals(pass)) {
 			
 			if (userLogin.getEstado().getEstado() == Recursos.NUEVO) {
 				
@@ -75,7 +72,7 @@ public class LoginEmpleados extends HttpServlet {
 			}
 		} else {
 			request.setAttribute("msg", "Datos incorrectos");
-			response.sendRedirect("formulario_login.html");
+			response.sendRedirect("formulario_login.jsp");
 		}
 	}
 
@@ -88,12 +85,5 @@ public class LoginEmpleados extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	
-	public boolean validarLogin(String user, String pass) {
-
-		return user.equals(pass);
-		
-	}
-		
 }
 
