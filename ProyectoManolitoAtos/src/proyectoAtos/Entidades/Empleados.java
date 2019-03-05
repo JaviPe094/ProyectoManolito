@@ -1,14 +1,23 @@
 package proyectoAtos.Entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Empleados")
-public class Empleados {
+@Table(name = "EMPLEADOS")
+public class Empleados implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "das")
 	private String das;
@@ -25,22 +34,23 @@ public class Empleados {
 	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "permisos")
-	private char permisos;
+	@ManyToOne
+	@JoinColumn(name = "permiso")
+	private Permisos per;
 	
 	public Empleados() {
 		
 		
 	}
 
-	public Empleados(String das, String password, String nombre, String apellido, String email, char permisos) {
+	public Empleados(String das, String password, String nombre, String apellido, String email, Permisos per) {
 		super();
 		this.das = das;
 		this.password = password;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
-		this.permisos = permisos;
+		this.per = per;
 	}
 
 	public String getDas() {
@@ -83,12 +93,12 @@ public class Empleados {
 		this.email = email;
 	}
 
-	public char getPermisos() {
-		return permisos;
+	public Permisos getPermisos() {
+		return per;
 	}
 
-	public void setPermisos(char permisos) {
-		this.permisos = permisos;
+	public void setPermisos(Permisos per) {
+		this.per = per;
 	}
 
 	// Debug
@@ -96,7 +106,7 @@ public class Empleados {
 	@Override
 	public String toString() {
 		return "Empleado [das=" + das + ", password=" + password + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", email=" + email + ", permisos=" + permisos + "]";
+				+ ", email=" + email + ", per=" + per + "]";
 	}
 	
 }

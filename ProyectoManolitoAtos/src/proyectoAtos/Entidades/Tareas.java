@@ -1,5 +1,7 @@
 package proyectoAtos.Entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,8 +9,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Tareas")
-public class Tareas {
+public class Tareas implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "nombre")
 	private String nombre;
@@ -19,6 +26,9 @@ public class Tareas {
 	@Column(name = "estado")
 	private char estado;
 
+	public Tareas() {
+		
+	}
 	public Tareas(String nombre, String descripcion, char estado) {
 		super();
 		this.nombre = nombre;
