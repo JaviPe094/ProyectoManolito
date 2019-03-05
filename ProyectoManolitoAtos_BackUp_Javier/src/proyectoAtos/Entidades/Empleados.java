@@ -18,6 +18,8 @@ public class Empleados implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public static enum ESTADOS{INACTIVO, ACTIVO, NUEVO};
+	
 	@Id
 	@Column(name = "das")
 	private String das;
@@ -36,27 +38,15 @@ public class Empleados implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "estado")
-	private Estado est;
+	private Estado estado;
 	
 	@ManyToOne
 	@JoinColumn(name = "permiso")
-	private Permisos per;
+	private Permisos permiso;
 	
 	public Empleados() {
 		
 		
-	}
-
-	public Empleados(String das, String password, String nombre, String apellido, String email, Estado est,
-			Permisos per) {
-		super();
-		this.das = das;
-		this.password = password;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.email = email;
-		this.est = est;
-		this.per = per;
 	}
 
 	public String getDas() {
@@ -100,23 +90,19 @@ public class Empleados implements Serializable {
 	}
 
 	public Estado getEstado() {
-		return est;
+		return estado;
 	}
 
-	public void setEstado(Estado est) {
-		this.est = est;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
-	public Permisos getPer() {
-		return per;
+	public Permisos getPermiso() {
+		return permiso;
 	}
 
-	public void setPer(Permisos per) {
-		this.per = per;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setPermiso(Permisos permiso) {
+		this.permiso = permiso;
 	}
 
 	// Debug
@@ -124,7 +110,8 @@ public class Empleados implements Serializable {
 	@Override
 	public String toString() {
 		return "Empleados [das=" + das + ", password=" + password + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", email=" + email + ", est=" + est + ", per=" + per + "]";
+				+ ", email=" + email + ", estado=" + estado + ", permiso=" + permiso + "]";
 	}
+
 	
 }
