@@ -19,7 +19,7 @@ import proyectoAtos.recursos.Recursos;
 /**
  * Servlet implementation class LoginEmpleados
  */
-@WebServlet("/login.html")
+@WebServlet("/LoginEmpleados")
 public class LoginEmpleados extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,8 +40,10 @@ public class LoginEmpleados extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setContentType("text/html;charset=UTF-8");
 		// Recuperamos los parametros
-		String user = request.getParameter("usuario");
+		String user = request.getParameter("das");
 		String pass = request.getParameter("contra"); 
+		
+		System.out.println(user+" "+pass);
 
 		HttpSession session = request.getSession();
 		
@@ -50,6 +52,8 @@ public class LoginEmpleados extends HttpServlet {
 		EmpleadoDAO dao =  new EmpleadoDAOImpl();
 		
 		Empleados userLogin = dao.read(user);
+		
+		System.out.println(userLogin);
 		
 		if (userLogin == null) {
 				
