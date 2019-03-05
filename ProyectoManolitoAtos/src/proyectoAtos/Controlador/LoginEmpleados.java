@@ -12,10 +12,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import proyectoAtos.Entidades.Empleados;
 import proyectoAtos.Modelo.EmpleadoDAO;
 import proyectoAtos.Modelo.EmpleadoDAOImpl;
+import proyectoAtos.recursos.Recursos;
 
 /**
  * Servlet implementation class LoginEmpleados
@@ -33,8 +35,9 @@ public class LoginEmpleados extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -43,17 +46,26 @@ public class LoginEmpleados extends HttpServlet {
 		String user = request.getParameter("usuario");
 		String pass = request.getParameter("contra"); 
 
-		System.out.println(user+","+pass);
+		HttpSession session = request.getSession();
+		
+		session.setMaxInactiveInterval(60);
 		
 		EmpleadoDAO dao =  new EmpleadoDAOImpl();
 		
 		Empleados userLogin = dao.read(user);
-		 
+		
+		if (userLogin == null) {
+			
+			request.setAttribute("msg", "Datos incorrectos");
+			response.sendRedirect("formulario_login.html");
+			
+		}
 		
 		if (validarLogin(userLogin.getDas(), pass)) {
 			
-			if (userLogin.getEstado() == 'i') {
+			if (userLogin.getEstado() == Recursos.NUEVO) {
 				
+				request.setAttribute("user", userLogin);
 				response.sendRedirect("cambio_clave.jsp");
 				
 			}
@@ -61,20 +73,20 @@ public class LoginEmpleados extends HttpServlet {
 				response.sendRedirect("Login_Correcto.jsp");
 			}
 		} else {
-			response.sendRedirect("Login_Incorrecto.jsp");
+			request.setAttribute("msg", "Datos incorrectos");
+			response.sendRedirect("formulario_login.html");
 		}
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	
-	/*
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doPost(request, response);
 	}
-	*/
+	
 	
 	public boolean validarLogin(String user, String pass) {
 

@@ -18,6 +18,8 @@ public class Empleados implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public static enum ESTADOS{INACTIVO, ACTIVO, NUEVO};
+	
 	@Id
 	@Column(name = "das")
 	private String das;
