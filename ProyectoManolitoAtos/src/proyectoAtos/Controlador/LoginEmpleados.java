@@ -19,7 +19,7 @@ import proyectoAtos.recursos.Recursos;
 /**
  * Servlet implementation class LoginEmpleados
  */
-@WebServlet("/login.html")
+@WebServlet("/LoginEmpleados")
 public class LoginEmpleados extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,8 +40,10 @@ public class LoginEmpleados extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setContentType("text/html;charset=UTF-8");
 		// Recuperamos los parametros
-		String user = request.getParameter("usuario");
+		String user = request.getParameter("das");
 		String pass = request.getParameter("contra"); 
+		
+		System.out.println(user+" "+pass);
 
 		HttpSession session = request.getSession();
 		
@@ -51,18 +53,17 @@ public class LoginEmpleados extends HttpServlet {
 		
 		Empleados userLogin = dao.read(user);
 		
+		System.out.println(userLogin);
 		
 		if (userLogin == null) {
-			
+				
 			request.setAttribute("msg", "Campos inválidos");
-			response.sendRedirect("formulario_login.html");
+			response.sendRedirect("formulario_login.jsp");
+			return;
 			
 		}
 		
-		
-		if (validarLogin(userLogin.getPassword(), pass)) {
-			
-			System.out.println(userLogin.getEstado());
+		if (userLogin.getPassword().equals(pass)) {
 			
 			if (userLogin.getEstado().getEstado() == Recursos.NUEVO) {
 				
@@ -75,7 +76,7 @@ public class LoginEmpleados extends HttpServlet {
 			}
 		} else {
 			request.setAttribute("msg", "Datos incorrectos");
-			response.sendRedirect("formulario_login.html");
+			response.sendRedirect("formulario_login.jsp");
 		}
 	}
 
@@ -88,12 +89,5 @@ public class LoginEmpleados extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	
-	public boolean validarLogin(String user, String pass) {
-
-		return user.equals(pass);
-		
-	}
-		
 }
 
