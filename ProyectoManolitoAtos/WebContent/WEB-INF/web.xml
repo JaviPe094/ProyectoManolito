@@ -14,8 +14,8 @@
 <!-- 	</servlet> -->
 	
 <!-- 	<servlet-mapping> -->
-<!-- 		<servlet-name>l ogin</servlet-name> -->
-<!-- 		<url-pattern>*.jsp</url-pattern> -->
+<!-- 		<servlet-name>login</servlet-name> -->
+<!-- 		<url-pattern>formulario_login.html</url-pattern> -->
 <!-- 	</servlet-mapping> -->
 	
 </web-app>

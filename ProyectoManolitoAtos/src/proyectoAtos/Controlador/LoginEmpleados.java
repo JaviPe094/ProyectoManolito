@@ -2,10 +2,7 @@ package proyectoAtos.Controlador;
 
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,7 +35,7 @@ public class LoginEmpleados extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setContentType("text/html;charset=UTF-8");
@@ -54,16 +51,18 @@ public class LoginEmpleados extends HttpServlet {
 		
 		Empleados userLogin = dao.read(user);
 		
-		/*
+		
 		if (userLogin == null) {
 			
-			request.setAttribute("msg", "Datos incorrectos");
+			request.setAttribute("msg", "Campos inválidos");
 			response.sendRedirect("formulario_login.html");
 			
 		}
-		*/
 		
-		if (validarLogin(userLogin.getDas(), pass)) {
+		
+		if (validarLogin(userLogin.getPassword(), pass)) {
+			
+			System.out.println(userLogin.getEstado());
 			
 			if (userLogin.getEstado().getEstado() == Recursos.NUEVO) {
 				
@@ -72,7 +71,7 @@ public class LoginEmpleados extends HttpServlet {
 				
 			}
 			else {
-				response.sendRedirect("Login_Correcto.jsp");
+				response.sendRedirect("usuario.jsp");
 			}
 		} else {
 			request.setAttribute("msg", "Datos incorrectos");
@@ -84,9 +83,9 @@ public class LoginEmpleados extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doPost(request, response);
+		doGet(request, response);
 	}
 	
 	
