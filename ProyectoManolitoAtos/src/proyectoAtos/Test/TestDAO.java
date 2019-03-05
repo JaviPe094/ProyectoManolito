@@ -10,12 +10,14 @@ public class TestDAO {
 		EmpleadoDAO edao=new EmpleadoDAOImpl();
 		TareasDAO tdao=new TareasDAOImpl();
 		PermisosDAO pdao=new PermisosDAOImpl();
-		
-		Permisos per=pdao.read("Administrador");
+		Permisos per=new Permisos();
+		per=pdao.read("Administrador");
 		
 		Empleados emp=edao.read("00a00b00c");
 		
-		emp=new Empleados("001002003", "prueba2", "prueba2", "prueba23", "prueba2@pr.pr",per);
+		System.out.println(emp);
+		
+		emp=new Empleados("001002003", "prueba2", "prueba2", "prueba23", "prueba2@pr.pr",'a', per);
 		
 		edao.create(emp);
 		
@@ -29,7 +31,6 @@ public class TestDAO {
 		
 		edao.delete("001002003");
 		
-		System.out.println(emp);
 	}
 
 }

@@ -2,12 +2,19 @@ package proyectoAtos.Modelo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import proyectoAtos.Entidades.Permisos;
 
 public class PermisosDAOImpl implements PermisosDAO{
 	
 	private EntityManagerFactory emf = null;
+	
+	public PermisosDAOImpl() {
+
+		emf = Persistence.createEntityManagerFactory("PU-ML");
+
+	}
 	
 	@Override
 	public void create(Permisos per) {
