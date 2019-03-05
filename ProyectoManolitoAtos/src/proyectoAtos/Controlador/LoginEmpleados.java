@@ -76,38 +76,8 @@ public class LoginEmpleados extends HttpServlet {
 	
 	public boolean validarLogin(String user, String pass) {
 
+		return user.equals(pass);
 		
-		
-		return test.getPassword().equals(pass);
-		
-		/* Version JDBC
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection miConexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios", "juancarlos",
-					"nosequeponer93");
-
-			String sql = "SELECT * FROM usuarios WHERE usuario=? AND contrasena=?";
-			PreparedStatement stm = miConexion.prepareStatement(sql);
-
-			stm.setString(1, user);
-			stm.setString(2, pass);
-
-			ResultSet rs = stm.executeQuery();
-
-			if (rs.absolute(1)) {
-				System.out.println("Usuario autorizado");
-				correcto = true;
-			} else {
-				System.out.println("No hay usuarios con estos datos");
-				correcto = false;
-			}
-		} catch (Exception e) {
-
-			e.printStackTrace();
-			System.out.println("Error en el login!");
-		}
-		return correcto;
-		*/
 	}
 		
 }

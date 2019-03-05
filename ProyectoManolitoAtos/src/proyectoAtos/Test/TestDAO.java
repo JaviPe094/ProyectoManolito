@@ -15,7 +15,7 @@ public class TestDAO {
 		
 		Empleados emp=edao.read("00a00b00c");
 		
-		emp=new Empleados("001002003", "prueba2", "prueba2", "prueba23", "prueba2@pr.pr",per);
+		emp= new Empleados("001002003", "prueba2", "prueba2", "prueba23", "prueba2@pr.pr",per);
 		
 		edao.create(emp);
 		

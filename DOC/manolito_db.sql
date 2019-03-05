@@ -18,3 +18,8 @@ CREATE TABLE Tareas(
                     nombre VARCHAR2(15) NOT NULL PRIMARY KEY,
                     descripcion VARCHAR2(50) NOT NULL,
                     estado CHAR NOT NULL);/*No me ha aceptado BOOLEAN como tipo de dato*/
+					
+                    
+insert into permisos values('b');
+                    
+insert into empleados values('c00001', 'pepe', 'pepe', 'pepe', 'pepe@p.es', 'i', 'b');
