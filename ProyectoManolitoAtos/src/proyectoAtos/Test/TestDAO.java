@@ -12,6 +12,7 @@ public class TestDAO {
 		
 		Empleados emp=edao.read("00a00b00c");
 		Permisos per=pdao.read("Administrador");
+		Estado est=new Estado();
 		
 		System.out.println(per);
 		
@@ -25,23 +26,23 @@ public class TestDAO {
 //		
 //		pdao.update(per);
 		
-		System.out.println(pdao.read("Usuario"));
+//		System.out.println(pdao.read("Usuario"));
+//		
+//		pdao.delete("Usuario");
 		
-		pdao.delete("Usuario");
+		emp=new Empleados("001002003", "prueba2", "prueba2", "prueba23", "prueba2@pr.pr", , per);
 		
-//		emp=new Empleados("001002003", "prueba2", "prueba2", "prueba23", "prueba2@pr.pr", 'i', per);
-//		
-//		edao.create(emp);
-//		
-//		System.out.println(edao.read("001002003"));
-//		
-//		emp.setNombre("Javier");
-//		
-//		edao.update(emp);
-//		
-//		System.out.println(edao.read("001002003"));
-//		
-//		//edao.delete("001002003");
+		edao.create(emp);
+		
+		System.out.println(edao.read("001002003"));
+		
+		emp.setNombre("Javier");
+		
+		edao.update(emp);
+		
+		System.out.println(edao.read("001002003"));
+		
+		edao.delete("001002003");
 	}
 	
 	
