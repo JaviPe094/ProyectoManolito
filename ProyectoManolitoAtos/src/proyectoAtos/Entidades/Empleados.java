@@ -34,6 +34,9 @@ public class Empleados implements Serializable {
 	@Column(name = "email")
 	private String email;
 	
+	@Column(name = "estado")
+	private char estado;
+	
 	@ManyToOne
 	@JoinColumn(name = "permiso")
 	private Permisos per;
@@ -43,13 +46,15 @@ public class Empleados implements Serializable {
 		
 	}
 
-	public Empleados(String das, String password, String nombre, String apellido, String email, Permisos per) {
+	public Empleados(String das, String password, String nombre, String apellido, String email, char estado,
+			Permisos per) {
 		super();
 		this.das = das;
 		this.password = password;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
+		this.estado = estado;
 		this.per = per;
 	}
 
@@ -93,20 +98,32 @@ public class Empleados implements Serializable {
 		this.email = email;
 	}
 
-	public Permisos getPermisos() {
+	public char getEstado() {
+		return estado;
+	}
+
+	public void setEstado(char estado) {
+		this.estado = estado;
+	}
+
+	public Permisos getPer() {
 		return per;
 	}
 
-	public void setPermisos(Permisos per) {
+	public void setPer(Permisos per) {
 		this.per = per;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	// Debug
 	
 	@Override
 	public String toString() {
-		return "Empleado [das=" + das + ", password=" + password + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", email=" + email + ", per=" + per + "]";
+		return "Empleados [das=" + das + ", password=" + password + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", email=" + email + ", estado=" + estado + ", per=" + per + "]";
 	}
 	
 }
