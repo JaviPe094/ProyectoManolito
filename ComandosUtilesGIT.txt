@@ -1,0 +1,24 @@
+
+
+Eliminar los archivos del repositorio
+
+Con el comando rm podremos borrar los archivos del repositorio, pero si lo ejecutamos tal cual nos eliminará también el archivo de nuestro directorio de trabajo.
+
+- Si queremos eliminar el directorio y su contenido haríamos esto:
+
+git rm -r --cached nombre_directorio
+
+- Seguidamente un commit para validar los cambios
+
+git commit -m 'Eliminados archivos no deseados'
+
+- Enviar los cambios al repositorio remoto (GitHub)
+
+git push
+
+- Si tenemos que especificar el repositorio remoto y la rama, sería así:
+
+git push origin master
+
+-----------------------------------------------------------------------------------
+
