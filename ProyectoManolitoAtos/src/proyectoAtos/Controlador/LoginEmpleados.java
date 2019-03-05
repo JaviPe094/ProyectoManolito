@@ -54,16 +54,18 @@ public class LoginEmpleados extends HttpServlet {
 		
 		Empleados userLogin = dao.read(user);
 		
+		/*
 		if (userLogin == null) {
 			
 			request.setAttribute("msg", "Datos incorrectos");
 			response.sendRedirect("formulario_login.html");
 			
 		}
+		*/
 		
 		if (validarLogin(userLogin.getDas(), pass)) {
 			
-			if (userLogin.getEstado() == Recursos.NUEVO) {
+			if (userLogin.getEstado().getEstado() == Recursos.NUEVO) {
 				
 				request.setAttribute("user", userLogin);
 				response.sendRedirect("cambio_clave.jsp");
