@@ -1,4 +1,4 @@
-package atos.manolito.modelo.entidades;
+package proyectoAtos.Modelo;
 
 import proyectoAtos.Entidades.Tareas;
 

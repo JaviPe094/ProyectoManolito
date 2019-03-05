@@ -1,4 +1,4 @@
-package atos.manolito.modelo.entidades;
+package proyectoAtos.Entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
