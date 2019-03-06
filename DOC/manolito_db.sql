@@ -28,7 +28,7 @@ CREATE TABLE Tareas(
                     descripcion VARCHAR2(50) NOT NULL,
                     estado CHAR NOT NULL);/*No me ha aceptado BOOLEAN como tipo de dato*/
 
-
+ALTER TABLE Tareas ADD FOREIGN KEY (estado) REFERENCES Estados(estado);
 					
                     
 

@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -33,13 +35,14 @@ public class Tareas implements Serializable {
 	@Column(name = "descripcion")
 	private String descripcion;
 	
-	@Column(name = "estado")
-	private char estado;
+	@ManyToOne
+	@JoinColumn(name = "estado")
+	private Estado estado;
 
 	public Tareas() {
 		
 	}
-	public Tareas(String nombre, String descripcion, char estado) {
+	public Tareas(String nombre, String descripcion, Estado estado) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -62,11 +65,11 @@ public class Tareas implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public char getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
 
-	public void setEstado(char estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 
