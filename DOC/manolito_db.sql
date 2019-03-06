@@ -31,10 +31,16 @@ CREATE TABLE Tareas(
 
 					
                     
-insert into permisos values('b');
-                    
-insert into empleados values('c00001', 'pepe', 'pepe', 'pepe', 'pepe@p.es', 'i', 'b');
+
+insert into permisos values("admin");
+insert into permisos values("basico");
+
+
+/*insert into empleados values('c00001', 'pepe', 'pepe', 'pepe', 'pepe@p.es', 'i', 'b');*/
 
 insert into estados values('a','Usuario activo.Puede acceder a la aplicación');
 insert into estados values('i','Usuario inactivo.No puede acceder a la aplicación');
 insert into estados values('n','Usuario nuevo.Necesita una nueva contraseña');
+
+insert into permisos values("admin");
+insert into permisos values("basico");

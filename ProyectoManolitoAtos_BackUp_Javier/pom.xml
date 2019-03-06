@@ -24,4 +24,29 @@
       </plugin>
     </plugins>
   </build>
+  
+  <properties>
+  
+  	<jstl-version>1.2.1</jstl-version>
+  	<tld-version>1.1.2</tld-version>
+  </properties>
+  
+  <dependencies>
+  
+  	<dependency>
+  		<groupId>javax.servlet.jsp.jstl</groupId>
+  		<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+  		<version>${jstl-version}</version>
+  	
+  	</dependency>
+  	
+  	  	<dependency>
+  		<groupId>taglibs</groupId>
+  		<artifactId>standard</artifactId>
+  		<version>${tld-version}</version>
+  	
+  	</dependency>
+  
+  </dependencies>
+  
 </project>
