@@ -68,6 +68,9 @@ public class Controlador extends HttpServlet {
 
 		// leer comando del formulario
 		String comando = request.getParameter("instruccion");
+		
+		request.getSession().setMaxInactiveInterval(10);
+		//request.getSession().on
 
 		// Salida rápida en caso de que se produzca un error en el comando
 		
@@ -92,7 +95,7 @@ public class Controlador extends HttpServlet {
 	
 				if (cambiarPass(request, response)) {
 					
-					if ((userLogin.getPermiso().getNombre()).equals("admin")) 
+					if (userLogin.getPermiso().getNombre().equals("admin")) 
 						enviarInfoPanelAdmin(request, response);
 					
 					else
@@ -103,6 +106,12 @@ public class Controlador extends HttpServlet {
 				else {
 					System.out.println("FALLO AL CAMBIAR PASSWORD");
 				}
+				
+				break;
+				
+			case "logout":
+				
+				onLogOut(request, response);
 				
 				break;
 
@@ -226,5 +235,26 @@ public class Controlador extends HttpServlet {
 		requesDis.forward(request, response);
 
 	}
+	
+	private void onLogOut(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
+		request.getSession().invalidate();
+		response.sendRedirect("formulario_login.jsp");
+		
+	}
 
+	private void anadirUsuario(HttpServletRequest request) {
+	
+		String das = (String) request.getAttribute("das");
+		String password = (String) request.getAttribute("password");
+		String nombre = (String) request.getAttribute("nombre");
+		String apellido = (String) request.getAttribute("apellido");
+		String email = (String) request.getAttribute("email");
+		Estado est=estadoDAO.read('n');
+		String permiso = (String) request.getAttribute("permiso");
+		
+	
+	}
+	
 }

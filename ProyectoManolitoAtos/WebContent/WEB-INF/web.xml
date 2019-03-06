@@ -5,7 +5,7 @@
 	<display-name>LOGIN-CONTROL</display-name>
 	
 	<welcome-file-list>
-		<welcome-file>formulario_login2.jsp</welcome-file>
+		<welcome-file>formulario_login.jsp</welcome-file>
 	</welcome-file-list>
 	
 <!-- 	<servlet> -->
@@ -17,5 +17,9 @@
 <!-- 		<servlet-name>login</servlet-name> -->
 <!-- 		<url-pattern>formulario_login.html</url-pattern> -->
 <!-- 	</servlet-mapping> -->
+
+	<session-config> 
+		<session-timeout>10</session-timeout> <!-- in minutes --> 
+	</session-config> 
 	
 </web-app>

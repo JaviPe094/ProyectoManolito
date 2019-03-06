@@ -1,11 +1,14 @@
 package proyectoAtos.Modelo;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
-import proyectoAtos.Entidades.Empleados;
 import proyectoAtos.Entidades.Tareas;
+
 
 public class TareasDAOImpl implements TareasDAO {
 
@@ -96,5 +99,29 @@ public class TareasDAOImpl implements TareasDAO {
 		}
 
 	}
+	
+	@Override
+	public List<Tareas> seleccionaTodos() {
+		
+		EntityManager em = emf.createEntityManager();
+		
+		try {
+
+
+			Query query = em.createNamedQuery("Tareas.seleccionaTodos");
+			
+			// Devolver lista entidades 
+			return query.getResultList();
+
+		} finally {
+			
+			if (em != null) {
+
+				em.close();
+			}
+		}
+		
+	}
+	
 
 }

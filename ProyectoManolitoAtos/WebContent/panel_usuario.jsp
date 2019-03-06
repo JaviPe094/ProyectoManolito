@@ -179,6 +179,11 @@
 			<input type="submit" value="Hacer algo">
 		
 		</div>
+		
+		<form name="form" method="post" action="Controlador">
+			<input type="submit" value="cerrar sesion">
+			<input type="hidden" name="instruccion" value="logout">
+		</form>
 	
 	</div>
 		
