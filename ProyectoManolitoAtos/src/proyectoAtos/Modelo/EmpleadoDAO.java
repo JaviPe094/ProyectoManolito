@@ -1,5 +1,7 @@
 package proyectoAtos.Modelo;
 
+import java.util.List;
+
 import proyectoAtos.Entidades.Empleados;
 
 public interface EmpleadoDAO {
@@ -11,5 +13,7 @@ public interface EmpleadoDAO {
 	public void update(Empleados empleado);
 	
 	public void delete(String dasEmpleado);
+	
+	public List<Empleados> seleccionaTodos();
 
 }
