@@ -73,10 +73,10 @@
 	<form name="form1" method="post" action="Controlador">
 	<input type="hidden" name="instruccion" value="validar">
 		<p>Usuario</p>
-		<input type="text" name="usuario" id="usuario"> 
+		<input type="text" name="usuario" id="usuario" required="required"> 
 		<br>
 		<p>Contraseña</p>
-		<input type="password" name="contra" id="contra">
+		<input type="password" name="contra" id="contra" required="required">
 		<br><br>
 		<input id="botonEnviar" type="submit" value="Aceptar">
 	</form>
