@@ -5,6 +5,22 @@ import proyectoAtos.Modelo.*;
 
 public class TestDAO {
 
+	public static void datosPruebaEmpleadosInsert(int cantidad,String cadena,
+			EmpleadoDAO edao,Permisos per,Estado est) {
+		Empleados emp=new Empleados();
+		for(int i=1;i<=cantidad;i++) {
+			emp.setDas(cadena+i);
+			emp.setPassword(cadena+i);
+			emp.setNombre(cadena+i);
+			emp.setApellido(cadena+i);
+			emp.setEmail(cadena+i);
+			emp.setEstado(est);
+			emp.setPermiso(per);
+			edao.create(emp);
+		}
+	}
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		EmpleadoDAO edao=new EmpleadoDAOImpl();
@@ -12,7 +28,7 @@ public class TestDAO {
 		PermisosDAO pdao=new PermisosDAOImpl();
 		EstadoDAO esdao = new EstadoDAOImpl();
 		
-		Permisos per=pdao.read("b");
+		Permisos per=pdao.read("admin");
 		Estado est = esdao.read('i');
 		
 		Empleados emp=edao.read("00a00b00c");
@@ -32,6 +48,8 @@ public class TestDAO {
 		edao.delete("001002003");
 		
 		System.out.println(emp);
+		
+		datosPruebaEmpleadosInsert(5,"prueba1_",edao,per,est);
 	}
 
 }
