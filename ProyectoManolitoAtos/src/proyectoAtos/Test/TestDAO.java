@@ -2,6 +2,7 @@ package proyectoAtos.Test;
 
 import proyectoAtos.Entidades.*;
 import proyectoAtos.Modelo.*;
+import proyectoAtos.recursos.EmpleadoUtil;
 
 public class TestDAO {
 
@@ -49,7 +50,12 @@ public class TestDAO {
 		
 		System.out.println(emp);
 		
-		datosPruebaEmpleadosInsert(5,"prueba1_",edao,per,est);
+		//datosPruebaEmpleadosInsert(5,"prueba1_",edao,per,est);
+		
+		System.out.println(EmpleadoUtil.generatePass(10));
+		System.out.println(EmpleadoUtil.generatePass(20));
+		System.out.println(EmpleadoUtil.generatePass(15));
+		System.out.println(EmpleadoUtil.generatePass(5));
 	}
 
 }
