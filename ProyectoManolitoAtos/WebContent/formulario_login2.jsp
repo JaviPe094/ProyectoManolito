@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
 <!doctype html>
 <html>
 <head>
@@ -72,6 +75,11 @@
 	<h2>LOGIN</h2>
 	<form name="form1" method="post" action="Controlador">
 	<input type="hidden" name="instruccion" value="validar">
+	<%
+	String msg = (String) request.getSession().getAttribute("msg");
+	if(msg != null && !msg.isEmpty()){%>
+		<span style="color:#B40404">${msg}</span>
+	<%}%>
 		<p>Usuario</p>
 		<input type="text" name="usuario" id="usuario" required="required"> 
 		<br>
@@ -79,6 +87,8 @@
 		<input type="password" name="contra" id="contra" required="required">
 		<br><br>
 		<input id="botonEnviar" type="submit" value="Aceptar">
+		
+		
 	</form>
 	</div>
 </body>

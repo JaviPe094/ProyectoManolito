@@ -181,7 +181,8 @@ public class Controlador extends HttpServlet {
 			else {
 				
 				System.out.println("FALLO EN EL LOGIN");
-				response.sendRedirect("Login_Incorrecto.jsp");
+				request.getSession().setAttribute("msg", "Oops.Login incorrecto");
+				response.sendRedirect("formulario_login2.jsp");
 				
 			}
 			
