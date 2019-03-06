@@ -17,6 +17,7 @@ import proyectoAtos.Modelo.EstadoDAO;
 import proyectoAtos.Modelo.EstadoDAOImpl;
 import proyectoAtos.recursos.Recursos;
 
+
 /**
  * Servlet implementation class Controlador
  * 
@@ -253,6 +254,8 @@ public class Controlador extends HttpServlet {
 		String email = (String) request.getAttribute("email");
 		Estado est=estadoDAO.read('n');
 		String permiso = (String) request.getAttribute("permiso");
+		
+		
 		
 	
 	}

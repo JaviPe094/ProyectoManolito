@@ -179,6 +179,14 @@ public class EmpleadoUtil {
 		
 			bw.write(Base64.getEncoder().encodeToString(key.getEncoded()));
 			
+			System.out.println("Llave generada!");
+			
+		}
+		
+		else {
+			
+			System.out.println("Llave no generada!");
+			
 		}
 		
 	}

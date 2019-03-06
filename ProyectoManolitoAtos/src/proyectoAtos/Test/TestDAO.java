@@ -6,7 +6,7 @@ import proyectoAtos.recursos.EmpleadoUtil;
 
 public class TestDAO {
 
-	public static void datosPruebaEmpleadosInsert(int cantidad,String cadena,
+	public static void datosPruebaInsertEmpleados(int cantidad,String cadena,
 			EmpleadoDAO edao,Permisos per,Estado est) {
 		Empleados emp=new Empleados();
 		for(int i=1;i<=cantidad;i++) {
@@ -18,6 +18,19 @@ public class TestDAO {
 			emp.setEstado(est);
 			emp.setPermiso(per);
 			edao.create(emp);
+			System.out.println("Insertado Empleado: "+emp);
+		}
+	}
+	
+	public static void datosPruebaInsertTareas(int cantidad,String cadena,
+			TareasDAO tdao,Estado est) {
+		Tareas tar=new Tareas();
+		for(int i=1;i<=cantidad;i++) {
+			tar.setNombre(cadena+i);
+			tar.setDescripcion(cadena+i);
+			tar.setEstado(est);
+			tdao.create(tar);
+			System.out.println("Insertada tarea: "+tar);
 		}
 	}
 	
@@ -50,8 +63,14 @@ public class TestDAO {
 		
 		System.out.println(emp);
 		
-		//datosPruebaEmpleadosInsert(5,"prueba1_",edao,per,est);
+		//datosPruebaInsertEmpleados(5,"prueba1_",edao,per,est);
 		
+//		System.out.println(EmpleadoUtil.generatePass(10));
+//		System.out.println(EmpleadoUtil.generatePass(20));
+//		System.out.println(EmpleadoUtil.generatePass(15));
+//		System.out.println(EmpleadoUtil.generatePass(5));
+		
+<<<<<<< HEAD
 		/*
 		System.out.println(EmpleadoUtil.generatePass(10));
 		System.out.println(EmpleadoUtil.generatePass(20));
@@ -68,6 +87,9 @@ public class TestDAO {
 		System.out.println(EmpleadoUtil.desencriptaString(encriptado));
 		
 
+=======
+		datosPruebaInsertTareas(10, "tarea_", tdao, esdao.read('a'));
+>>>>>>> d6d5d26d8c27dd9d5474d6d53b243aa7a9640ba0
 	}
 
 }
