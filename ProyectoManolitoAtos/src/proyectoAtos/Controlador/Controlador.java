@@ -87,19 +87,23 @@ public class Controlador extends HttpServlet {
 
 		case "usuarioAceptado":
 
-			if ((userLogin.getPermiso().getNombre()).equals("admin")) {
+			/*if ((userLogin.getPermiso().getNombre()).equals("admin")) {
 				estado = new Estado();
 				estado = estadoDAO.read('a');
 				userLogin.setEstado(estado);
 
 				enviarInfoPanelAdmin(request, response);
 				
-			} else if (cambiarPass(request, response)) {
-				estado = new Estado();
+			} else*/ if (cambiarPass(request, response)) {
+				if ((userLogin.getPermiso().getNombre()).equals("admin")) {
+					enviarInfoPanelAdmin(request, response);
+				}else
+					enviarInfoPanelUser(request, response);
+				/*estado = new Estado();
 				estado = estadoDAO.read('a');
-				userLogin.setEstado(estado);
+				userLogin.setEstado(estado);*/
 
-				enviarInfoPanelUser(request, response);
+				
 
 				// response.sendRedirect("panel_usuario.html");
 			} else {
@@ -133,7 +137,11 @@ public class Controlador extends HttpServlet {
 			throws ServletException, IOException {
 
 		String pass = request.getParameter("contrasena");
-
+		
+		/*estado = new Estado();
+		estado = estadoDAO.read('a');*/
+		userLogin.setEstado(estadoDAO.read('a'));
+		
 		userLogin.setPassword(pass);
 		dao.update(userLogin);
 		if (userLogin.getPassword().equals(pass))
