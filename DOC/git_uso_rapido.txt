@@ -1,4 +1,4 @@
-Uso simplificado de git:
+﻿Uso simplificado de git:
 
 1. git add -A (o bien git add .)
 
