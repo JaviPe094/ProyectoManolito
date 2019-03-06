@@ -1,6 +1,10 @@
 package proyectoAtos.Controlador;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,10 +22,8 @@ import proyectoAtos.Modelo.EstadoDAOImpl;
 import proyectoAtos.recursos.Recursos;
 
 /**
- * Servlet implementation class Controlador
- * 
+ * Servlet implementation class LoginEmpleados
  */
-
 @WebServlet("/Controlador")
 public class Controlador extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,10 +34,10 @@ public class Controlador extends HttpServlet {
 	EstadoDAO estadoDAO;
 	Estado estado;
 
-	/* Contructor de Controlador */
-	
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
 	public Controlador() {
-		
 		super();
 
 		dao = new EmpleadoDAOImpl();
@@ -46,71 +48,71 @@ public class Controlador extends HttpServlet {
 
 	}
 
-	/* 
-	 * Tanto doPost como doGet son necesarios. En este caso, por evitar que los datos de formulario
-	 * salgan en la barra de direcciones se ha optado por doPost. doGet queda vacío.
-	 * 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	}
-	
-	/* 
-	 * La funcionalidad se encuentra en el método doPost. Se ha optado por el enfoque de
-	 * un servlet encargado de las funcionalidades frente a varios servlets, con el objetivo
-	 * de unificar las operaciones
-	 * 
-	 */
+		// TODO Auto-generated method stub
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		// response.setContentType("text/html;charset=UTF-8");
 
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		// doGet(request, response);
 
-		// leer comando del formulario
+		// leer parametro del formulario
 		String comando = request.getParameter("instruccion");
 
-		// Salida rápida en caso de que se produzca un error en el comando
-		
 		if (comando == null) {
 
 			System.out.println("El comando esta vacio");
 
 			response.sendRedirect("formulario_login2.html");
-			
-			return;
 
 		}
 
 		switch (comando) {
-		
-			case "validar":
-				
-				validarLogin(request, response);
-				break;
-	
-			case "usuarioAceptado":
-	
-				if (cambiarPass(request, response)) {
-					
-					if ((userLogin.getPermiso().getNombre()).equals("admin")) 
-						enviarInfoPanelAdmin(request, response);
-					
-					else
-						enviarInfoPanelUser(request, response);
-	
-				} 
-				
-				else {
-					System.out.println("FALLO AL CAMBIAR PASSWORD");
-				}
-				
-				break;
+		case "validar":
+			validarLogin(request, response);
+			break;
 
-			default:
-				break;
+		case "usuarioAceptado":
+
+			/*if ((userLogin.getPermiso().getNombre()).equals("admin")) {
+				estado = new Estado();
+				estado = estadoDAO.read('a');
+				userLogin.setEstado(estado);
+
+				enviarInfoPanelAdmin(request, response);
 				
+			} else*/ if (cambiarPass(request, response)) {
+				if ((userLogin.getPermiso().getNombre()).equals("admin")) {
+					enviarInfoPanelAdmin(request, response);
+				}else
+					enviarInfoPanelUser(request, response);
+				/*estado = new Estado();
+				estado = estadoDAO.read('a');
+				userLogin.setEstado(estado);*/
+
+				
+
+				// response.sendRedirect("panel_usuario.html");
+			} else {
+				System.out.println("FALLO AL CAMBIAR PASSWORD");
+			}
+
+		default:
+			break;
 		}
-		
 	}
 
 	private void enviarInfoPanelUser(HttpServletRequest request, HttpServletResponse response)
@@ -136,13 +138,18 @@ public class Controlador extends HttpServlet {
 
 		String pass = request.getParameter("contrasena");
 		
+		/*estado = new Estado();
+		estado = estadoDAO.read('a');*/
 		userLogin.setEstado(estadoDAO.read('a'));
 		
 		userLogin.setPassword(pass);
 		dao.update(userLogin);
-		
-		return userLogin.getPassword().equals(pass);
-		
+		if (userLogin.getPassword().equals(pass))
+			return true;
+
+		else
+			return false;
+
 	}
 
 	public boolean validarLogin(HttpServletRequest request, HttpServletResponse response)
@@ -153,45 +160,64 @@ public class Controlador extends HttpServlet {
 		String pass = request.getParameter("contra");
 		
 		try {
+			// System.out.println(user + "," + pass);
 
 			userLogin = dao.read(user);
-			
-			if (userLogin != null && userLogin.getPassword().equals(pass)) {
 
+			if (userLogin.getDas().equals(user)&& userLogin.getPassword().equals(pass)) {
+				System.out.println("LA COMPARACION ES CORRECTA");
 				if ((userLogin.getPermiso().getNombre()).equals("admin")) {
 					esAdmin(request, response);
-				}
-				
-				else if((userLogin.getPermiso().getNombre()).equals("basico")) {
-					
+				}else if((userLogin.getPermiso().getNombre()).equals("basico")) {
 					if ((userLogin.getEstado().getEstado()) == Recursos.NUEVO) {
 
 						response.sendRedirect("nueva_contrasena.html");
-						
-					} 
-					
-					else {
+					} else {
 						
 						enviarInfoPanelUser(request, response);
 					}
 				}
 					
-			} 
-			
-			else {
-				
+					/*if ((userLogin.getEstado().getEstado()) == Recursos.NUEVO) {
+
+					response.sendRedirect("nueva_contrasena.html");
+
+				} else {
+					
+					enviarInfoPanelUser(request, response);
+				}*/
+			} else {
 				System.out.println("FALLO EN EL LOGIN");
-				request.getSession().setAttribute("msg", "Oops.Login incorrecto");
-				response.sendRedirect("formulario_login2.jsp");
-				
+				response.sendRedirect("Login_Incorrecto.jsp");
 			}
-			
 		} catch (Exception e) {
-			
 			e.printStackTrace();
-			
 		}
 		
+		/*try {
+			// System.out.println(user + "," + pass);
+
+			userLogin = dao.read(user);
+
+			if ((userLogin.getPermiso().getNombre()).equals("admin")) {
+				esAdmin(request, response);
+			}else if (userLogin.getDas().equals(user)&& userLogin.getPassword().equals(pass)) {
+				System.out.println("LA COMPARACION ES CORRECTA");
+				if ((userLogin.getEstado().getEstado()) == Recursos.NUEVO) {
+
+					response.sendRedirect("nueva_contrasena.html");
+
+				} else {
+					enviarInfoPanelUser(request, response);
+				}
+			} else {
+				System.out.println("FALLO EN EL LOGIN");
+				response.sendRedirect("Login_Incorrecto.jsp");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		System.out.println("Ha llegado hasta el final del metodo");
 		return user.equals(pass);
 
 	}

@@ -46,8 +46,20 @@ public class Empleados implements Serializable {
 	
 	public Empleados() {
 		
-		
 	}
+
+	public Empleados(String das, String password, String nombre, String apellido, String email, Estado estado,
+			Permisos permiso) {
+		this.das = das;
+		this.password = password;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.estado = estado;
+		this.permiso = permiso;
+	}
+
+
 
 	public String getDas() {
 		return das;
