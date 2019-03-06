@@ -5,15 +5,7 @@
 	<display-name>LOGIN-CONTROL</display-name>
 	
 	<welcome-file-list>
-<<<<<<< HEAD
 		<welcome-file>formulario_login.jsp</welcome-file>
-=======
-<<<<<<< HEAD
-		<welcome-file>formulario_login2.html</welcome-file>
-=======
-		<welcome-file>formulario_login2.jsp</welcome-file>
->>>>>>> a92578f9d4d0c75aab61ba04b98237febf96be09
->>>>>>> a2c81cb11dd93407b4c81832ae9950ec2d697cb9
 	</welcome-file-list>
 	
 <!-- 	<servlet> -->
