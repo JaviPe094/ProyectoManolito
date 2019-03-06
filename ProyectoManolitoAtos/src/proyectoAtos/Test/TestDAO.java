@@ -52,10 +52,22 @@ public class TestDAO {
 		
 		//datosPruebaEmpleadosInsert(5,"prueba1_",edao,per,est);
 		
+		/*
 		System.out.println(EmpleadoUtil.generatePass(10));
 		System.out.println(EmpleadoUtil.generatePass(20));
 		System.out.println(EmpleadoUtil.generatePass(15));
 		System.out.println(EmpleadoUtil.generatePass(5));
+		*/
+		
+		String enClaro = "Hola, soy un string";
+		
+		String encriptado = EmpleadoUtil.encriptaString(enClaro);
+		
+		System.out.println(encriptado);
+		
+		System.out.println(EmpleadoUtil.desencriptaString(encriptado));
+		
+
 	}
 
 }
