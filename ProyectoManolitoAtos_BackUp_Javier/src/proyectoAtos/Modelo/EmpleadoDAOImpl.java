@@ -1,8 +1,11 @@
 package proyectoAtos.Modelo;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import proyectoAtos.Entidades.Empleados;
 
@@ -100,7 +103,29 @@ private EntityManagerFactory emf = null;
 		}
 		
 	}
+	
+	@Override
+	public List<Empleados> seleccionaTodos() {
+			
+		EntityManager em = emf.createEntityManager();
+		
+		try {
 
+			Query query = em.createNamedQuery("Empleados.seleccionaTodos");
+			
+			// Devolver lista entidades 
+			return query.getResultList();
 
+		} 
+		
+		finally {
+
+			if (em != null) {
+				
+				em.close();
+			}
+		}
+	
+	}
 	
 }

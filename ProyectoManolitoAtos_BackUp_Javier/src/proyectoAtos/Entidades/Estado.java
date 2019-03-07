@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ESTADOS")
+
+
 public class Estado implements Serializable {
 	
 	/**
