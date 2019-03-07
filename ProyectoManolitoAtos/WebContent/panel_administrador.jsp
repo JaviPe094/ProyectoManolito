@@ -3,6 +3,7 @@
 <head>
 <script src="js/Timeout.js">
 </script>
+
 <meta charset="utf-8">
 <title>Panel Administrador</title>
 	<style type="text/css">

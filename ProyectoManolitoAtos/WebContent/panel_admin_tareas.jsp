@@ -3,10 +3,10 @@
 <%@page import="proyectoAtos.Entidades.Tareas"%>
 <html>
 <head>
-<<<<<<< HEAD
+
 <script src="js/Timeout.js"></script>
-=======
->>>>>>> 19e4882e662a35391f31c694d1ce5a8883ca485d
+
+
 <meta charset="utf-8">
 <title>Panel Administracion Usuarios</title>
 	<style type="text/css">
