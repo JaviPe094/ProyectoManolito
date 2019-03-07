@@ -184,11 +184,11 @@
 %>
 
 
-<<<<<<< HEAD
+
 <body onmousemove="reiniciarTimeout(60)" onkeypress="reiniciarTimeout(60)" onload="iniciarTimeout(60)" bgcolor="#ADD5FF">
-=======
+
 <body bgcolor="#ADD5FF">
->>>>>>> 19e4882e662a35391f31c694d1ce5a8883ca485d
+
 	
 	<div id="cabecera">
 	
