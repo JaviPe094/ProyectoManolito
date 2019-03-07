@@ -23,10 +23,15 @@ import proyectoAtos.Modelo.EstadoDAO;
 import proyectoAtos.Modelo.EstadoDAOImpl;
 import proyectoAtos.Modelo.TareasDAO;
 import proyectoAtos.Modelo.TareasDAOImpl;
+<<<<<<< HEAD
 
 //import proyectoAtos.recursos.Recursos;
 
 import proyectoAtos.recursos.*;;
+=======
+import proyectoAtos.recursos.EmpleadoUtil;
+import proyectoAtos.recursos.Recursos;
+>>>>>>> 1109c2e2e2ea199aac1634154c0596419a617d46
 
 
 /**
@@ -240,6 +245,12 @@ public class Controlador extends HttpServlet {
 						
 					}
 					
+					else {
+						
+						request.getSession().setAttribute("msg", "Credencias incorrectas");
+						response.sendRedirect("formulario_login.jsp");
+						
+					}
 					
 				}
 				
@@ -251,6 +262,13 @@ public class Controlador extends HttpServlet {
 						
 					}
 					
+					else {
+						
+						request.getSession().setAttribute("msg", "Credencias incorrectas");
+						response.sendRedirect("formulario_login.jsp");
+						
+					}
+					
 				}
 
 			}
@@ -258,7 +276,9 @@ public class Controlador extends HttpServlet {
 			else {
 
 				System.out.println("FALLO EN EL LOGIN");
-				response.sendRedirect("Login_Incorrecto.jsp");
+				request.getSession().setAttribute("msg", "Login erróneo");
+				response.sendRedirect("formulario_login.jsp");
+			
 
 			}
 

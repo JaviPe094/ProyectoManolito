@@ -11,7 +11,10 @@ import proyectoAtos.Entidades.Empleados;
 
 public class EmpleadoDAOImpl implements EmpleadoDAO {
 
-private EntityManagerFactory emf = null;
+	private EntityManagerFactory emf = null;
+
+	private int puntero;
+	private int maxPaginas;
 	
 	public EmpleadoDAOImpl() {
 		
