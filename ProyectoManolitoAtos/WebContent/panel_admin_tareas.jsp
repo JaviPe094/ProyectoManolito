@@ -3,10 +3,6 @@
 <%@page import="proyectoAtos.Entidades.Tareas"%>
 <html>
 <head>
-
-<script src="js/Timeout.js"></script>
-
-
 <meta charset="utf-8">
 <title>Panel Administracion Usuarios</title>
 	<style type="text/css">
@@ -21,7 +17,7 @@
 		margin:20px auto auto;
 		background-color: white;
 		width: 950px;	
-		height: 750px;
+		height: 780px;
 		padding: 10px;
 		
 	}
@@ -112,7 +108,7 @@
 			position: relative;
 			background-color: #167CDC;
 			width: 100%;
-			height: 390px;
+			height: 420px;
 			margin-top: 10px;
 		}
 		
@@ -162,18 +158,17 @@
 		#botonesAccion{
 			
 			position: absolute;
-			margin-top: 740px;
+			margin-top: -30px;
 			margin-left: 50px;
 		}
+		
 		
 		#tabla{
 			position: absolute;
 			width: 100%;
 			margin-top: 1px;
 			
-		}
-		
-		
+		}	
 	
 	</style>
 </head>
@@ -183,12 +178,7 @@
 	List<Tareas> listaTareas = (List<Tareas>) request.getAttribute("LISTARTAREAS");
 %>
 
-
-
-<body onmousemove="reiniciarTimeout(60)" onkeypress="reiniciarTimeout(60)" onload="iniciarTimeout(60)" bgcolor="#ADD5FF">
-
 <body bgcolor="#ADD5FF">
-
 	
 	<div id="cabecera">
 	
@@ -214,7 +204,9 @@
 			<form action="Controlador" method="post">
 			<input type="submit" value="VISTA USUARIOS">
 			<input type="hidden" name="instruccion" value="listarEmpleados">
+			</form>
 			<br><br>
+			<form action="Controlador" method="post">
 			<input type="submit" value="VISTA TAREAS">
 			<input type="hidden" name="instruccion" value="listarTareas">
 			</form>
@@ -241,7 +233,7 @@
 		 <tr>
 		 	<td><%=tare.getNombre()%></td>
 		 	<td><%=tare.getDescripcion()%></td>
-		 	<td><%=tare.getEstado()%></td>
+		 	<td><%=tare.getEstado().getEstado()%></td>
 		 	
 		 
     </tr>
@@ -249,11 +241,9 @@
   </tbody>
 </table>
 
-			
 	</div>
 	</div>
-	<div id="botonesAccion"><input type="submit" value="Insertar Tarea">&nbsp;&nbsp;&nbsp;
-		<input type="submit" value="Borrar Tarea"></div>
+	<div id="botonesAccion"><input type="submit" value="Insertar Tarea" onclick="window.location.href='insercion_tareas.html'"></div>
 	</div>
 			
 </body>

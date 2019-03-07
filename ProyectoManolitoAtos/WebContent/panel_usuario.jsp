@@ -1,7 +1,8 @@
 <!doctype html>
+<%@page import="java.util.List"%>
+<%@page import="proyectoAtos.Entidades.Tareas"%>
 <html>
 <head>
-<script src="js/Timeout.js"></script>
 <meta charset="utf-8">
 <title>Panel Usuario</title>
 	<style type="text/css">
@@ -153,6 +154,12 @@
 	
 	</style>
 </head>
+
+<%
+	//obtener los registros de Empleados
+	List<Tareas> listaTareas = (List<Tareas>) request.getAttribute("LISTARTAREAS");
+%>
+
 <body bgcolor="#ADD5FF">
 	
 	<div id="cabecera">
@@ -192,40 +199,21 @@
 			<table width="100%" border="2">
   <tbody>
     <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <th>NOMBRE</th>
+      <th>DESCRIPCION</th>
+      <th>ESTADO</th>
     </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+    
+    <% for(Tareas tare : listaTareas){%>
+
+		 <tr>
+		 	<td><%=tare.getNombre()%></td>
+		 	<td><%=tare.getDescripcion()%></td>
+		 	<td><%=tare.getEstado().getEstado()%></td>
+		 	
+		 
     </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
+    <%} %>
   </tbody>
 </table>
 

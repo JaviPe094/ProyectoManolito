@@ -7,10 +7,6 @@
 <!doctype html>
 <html>
 <head>
-
-<script src="js/Timeout.js"></script>
-
-
 <meta charset="utf-8">
 <title>Panel Administracion Usuarios</title>
 	<style type="text/css">
@@ -25,7 +21,7 @@
 		margin:20px auto auto;
 		background-color: white;
 		width: 950px;	
-		height: 750px;
+		height: 780px;
 		padding: 10px;
 		
 	}
@@ -116,7 +112,7 @@
 			position: relative;
 			background-color: #167CDC;
 			width: 100%;
-			height: 390px;
+			height: 420px;
 			margin-top: 10px;
 		}
 		
@@ -166,7 +162,7 @@
 		#botonesAccion{
 			
 			position: absolute;
-			margin-top: 740px;
+			margin-top: -30px;
 			margin-left: 50px;
 		}
 		
@@ -188,11 +184,7 @@
 %>
 
 
-
-<body onmousemove="reiniciarTimeout(60)" onkeypress="reiniciarTimeout(60)" onload="iniciarTimeout(60)" bgcolor="#ADD5FF">
-
 <body bgcolor="#ADD5FF">
-
 	
 	<div id="cabecera">
 	
@@ -233,12 +225,11 @@
 	<div id="parteAbajo">
 	<div id="marcoTareas">
 		<div id="fondoTabla">
-			
+		
 			<table id="tabla" width="100%" border="2">
   <tbody>
    <tr>
       <th>DAS</th>
-      <th>PASSWORD</th>
       <th>NOMBRE</th>
       <th>APELLIDO</th>
       <th>EMAIL</th>
@@ -251,13 +242,11 @@
 
 		 <tr>
 		 	<td><%=emp.getDas()%></td>
-		 	<td><%=emp.getPassword()%></td>
 		 	<td><%=emp.getNombre()%></td>
 		 	<td><%=emp.getApellido()%></td>
 		 	<td><%=emp.getEmail()%></td>
 		 	<td><%=emp.getEstado().getEstado()%></td>
-		 	<td><%=emp.getPermiso().getNombre()%></td>
-		 	
+		 	<td><%=emp.getPermiso().getNombre()%></td>	 	
 		 
     </tr>
     <%} %>
@@ -267,8 +256,8 @@
 			
 	</div>
 	</div>
-	<div id="botonesAccion"><input type="submit" value="Insertar Tarea">&nbsp;&nbsp;&nbsp;
-		<input type="submit" value="Borrar Tarea"></div>
+	<div id="botonesAccion"><input type="button" value="Insertar Usuario" onclick="window.location.href='insercion_usuarios.html'">&nbsp;&nbsp;&nbsp;
+	</div>
 	</div>
 			
 </body>

@@ -1,10 +1,6 @@
 package proyectoAtos.Controlador;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -21,6 +17,7 @@ import proyectoAtos.Modelo.EmpleadoDAO;
 import proyectoAtos.Modelo.EmpleadoDAOImpl;
 import proyectoAtos.Modelo.EstadoDAO;
 import proyectoAtos.Modelo.EstadoDAOImpl;
+import proyectoAtos.Modelo.PermisosDAOImpl;
 import proyectoAtos.Modelo.TareasDAO;
 import proyectoAtos.Modelo.TareasDAOImpl;
 import proyectoAtos.recursos.EmpleadoUtil;
@@ -162,6 +159,35 @@ public class Controlador extends HttpServlet {
 			}
 			break;
 			
+		case "insertar_usuario":
+			
+			String das = request.getParameter("das");
+			String nombre = request.getParameter("nombre");
+			String apellido = request.getParameter("apellidos");
+			String email = request.getParameter("email");
+			String per = request.getParameter("permisos");
+			System.out.println(per);
+			
+			
+			
+			Empleados newEmpleado = new Empleados(das, EmpleadoUtil.generatePass(8), nombre, apellido, 
+					email, new EstadoDAOImpl().read('n'), new PermisosDAOImpl().read(per));
+			
+			dao.create(newEmpleado);
+			
+			break;
+			
+		case "insertar_tarea":
+			
+			
+			String nomb = request.getParameter("nombre");
+			String descripcion = request.getParameter("descripcion");
+			char estado = request.getParameter("estado").charAt(0);
+			
+			Tareas newTareas = new Tareas(nomb, descripcion, new EstadoDAOImpl().read(estado));
+			
+			tareasDAO.create(newTareas);
+			
 		case "logout":
 			
 			onLogOut(request, response);
@@ -201,6 +227,12 @@ public class Controlador extends HttpServlet {
 		request.setAttribute("nombre", nombre);
 		request.setAttribute("apellido", apellido);
 		request.setAttribute("email", email);
+		
+		List<Tareas> listaTareas = tareasDAO.seleccionaTodos();
+
+		//System.out.println(listaTareas);
+
+		request.setAttribute("LISTARTAREAS", listaTareas);
 
 		RequestDispatcher requesDis = request.getRequestDispatcher("panel_usuario.jsp");
 		requesDis.forward(request, response);
@@ -330,6 +362,7 @@ public class Controlador extends HttpServlet {
 			throws ServletException, IOException {
 		
 		request.getSession().invalidate();
+		//request.getSession().setAttribute("msg", "Sesión cerrada");
 		response.sendRedirect("formulario_login.jsp");
 		
 	}

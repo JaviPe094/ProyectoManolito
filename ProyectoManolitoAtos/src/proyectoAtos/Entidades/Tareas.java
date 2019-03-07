@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @NamedQueries({
 	
-	@NamedQuery(name="Tareas.seleccionaTodo", query="SELECT t FROM Tareas t")
+	@NamedQuery(name="Tareas.seleccionaTodos", query="SELECT t FROM Tareas t")
 
 })
 

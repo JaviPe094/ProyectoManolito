@@ -1,10 +1,6 @@
 <!doctype html>
 <html>
 <head>
-<<<<<<< HEAD
-<script src="js/Timeout.js"></script>
-=======
->>>>>>> 19e4882e662a35391f31c694d1ce5a8883ca485d
 <meta charset="utf-8">
 <title>Inserccion Tareas</title>
 	
@@ -71,34 +67,36 @@
 	
 	</style>
 </head>
-
-<body onmousemove="reiniciarTimeout(60)" onkeypress="reiniciarTimeout(60)" onload="iniciarTimeout(60)">
-
 <body>
-
 	<div>
 	<h2>Inserción tareas</h2>
-	<form>
+	<form action="Controlador" method="post">
 		<table width="50%">
   <tbody>
     <tr>
       <td>NOMBRE</td>
-      <td><input type="text"></td>
+      <td><input type="text" name="nombre" id="nombre"></td>
     </tr>
 	  
     <tr>
       <td>DESCRIPCION</td>
-      <td><input type="text"></td>
+      <td><input type="text" name="descripcion" id="descripcion"></td>
     </tr>
 	  
     <tr>
       <td>ESTADO</td>
-      <td><input type="text"></td>
+      <td><label><input type="radio" name="estado" value="a" id="estado_1">Activo</label>
+        <br>
+        <label><input type="radio" name="estado" value="n" id="estado_2">Nuevo</label>
+        <br>
+        <label><input type="radio" name="estado" value="i" id="estado_2">Inactivo</label>
+        </td>
     </tr>
   </tbody>
 </table>
-
+		
 		<input id="botonEnviar" type="submit">
+		<input type="hidden" name="instruccion" value="insertar_tarea">
 	</form>
 	</div>
 	
