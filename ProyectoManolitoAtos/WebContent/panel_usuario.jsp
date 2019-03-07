@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+<script src="js/Timeout.js"></script>
 <meta charset="utf-8">
 <title>Panel Usuario</title>
 	<style type="text/css">
@@ -179,11 +180,6 @@
 			<input type="submit" value="Hacer algo">
 		
 		</div>
-		
-		<form name="form" method="post" action="Controlador">
-			<input type="submit" value="cerrar sesion">
-			<input type="hidden" name="instruccion" value="logout">
-		</form>
 	
 	</div>
 		
