@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+<script src="js/Timeout.js"></script>
 <meta charset="utf-8">
 <title>Panel Usuario</title>
 	<style type="text/css">

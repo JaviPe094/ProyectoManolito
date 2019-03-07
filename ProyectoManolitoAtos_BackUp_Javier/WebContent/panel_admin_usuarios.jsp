@@ -1,6 +1,10 @@
-<!doctype html>
-<%@page import="java.util.List"%>
+<%@page import="proyectoAtos.Entidades.Empleados"%>
 <%@page import="proyectoAtos.Entidades.Tareas"%>
+<%@page import="java.util.List"%>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!doctype html>
 <html>
 <head>
 <<<<<<< HEAD
@@ -180,15 +184,15 @@
 
 <%
 	//obtener los registros de Empleados
-	List<Tareas> listaTareas = (List<Tareas>) request.getAttribute("LISTARTAREAS");
+	List<Empleados> listaEmpleados = (List<Empleados>) request.getAttribute("LISTAREMPLEADOS");
 %>
 
 
-
+<<<<<<< HEAD
 <body onmousemove="reiniciarTimeout(60)" onkeypress="reiniciarTimeout(60)" onload="iniciarTimeout(60)" bgcolor="#ADD5FF">
-
+=======
 <body bgcolor="#ADD5FF">
-
+>>>>>>> 19e4882e662a35391f31c694d1ce5a8883ca485d
 	
 	<div id="cabecera">
 	
@@ -214,7 +218,9 @@
 			<form action="Controlador" method="post">
 			<input type="submit" value="VISTA USUARIOS">
 			<input type="hidden" name="instruccion" value="listarEmpleados">
+			</form>
 			<br><br>
+			<form action="Controlador" method="post">
 			<input type="submit" value="VISTA TAREAS">
 			<input type="hidden" name="instruccion" value="listarTareas">
 			</form>
@@ -228,20 +234,29 @@
 	<div id="marcoTareas">
 		<div id="fondoTabla">
 			
-			<table width="100%" border="2">
+			<table id="tabla" width="100%" border="2">
   <tbody>
    <tr>
+      <th>DAS</th>
+      <th>PASSWORD</th>
       <th>NOMBRE</th>
-      <th>DESCRIPCION</th>
+      <th>APELLIDO</th>
+      <th>EMAIL</th>
       <th>ESTADO</th>
+      <th>PERMISOS</th>
+      
     </tr>
     
-    <% for(Tareas tare : listaTareas){%>
+    <% for(Empleados emp : listaEmpleados){%>
 
 		 <tr>
-		 	<td><%=tare.getNombre()%></td>
-		 	<td><%=tare.getDescripcion()%></td>
-		 	<td><%=tare.getEstado()%></td>
+		 	<td><%=emp.getDas()%></td>
+		 	<td><%=emp.getPassword()%></td>
+		 	<td><%=emp.getNombre()%></td>
+		 	<td><%=emp.getApellido()%></td>
+		 	<td><%=emp.getEmail()%></td>
+		 	<td><%=emp.getEstado().getEstado()%></td>
+		 	<td><%=emp.getPermiso().getNombre()%></td>
 		 	
 		 
     </tr>

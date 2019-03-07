@@ -1,15 +1,14 @@
 <!doctype html>
 <html>
 <head>
+<meta charset="utf-8">
 <<<<<<< HEAD
 <script src="js/Timeout.js"></script>
 =======
 >>>>>>> 19e4882e662a35391f31c694d1ce5a8883ca485d
-<meta charset="utf-8">
-<title>Inserccion Tareas</title>
-	
+<title>Insercion Usuarios</title>
 	<style type="text/css">
-		html{
+	html{
 		
 		background-color: #648CE9;
 	}
@@ -18,8 +17,8 @@
 		border: solid #223DBB 3px;
 		margin:20px auto auto;
 		background-color: white;
-		width: 340px;	
-		height: 290px;
+		width: 300px;	
+		height: 345px;
 		padding: 10px;
 		
 	}
@@ -28,7 +27,7 @@
 		div{
 			position: absolute;
 			background-color: #167CDC;
-			width: 300px;
+			width: 258px;
 			padding: 20px;
 			margin-top: 40px;
 		}
@@ -38,16 +37,16 @@
 			margin-top: -60px;
 			border-bottom: dotted #0055AF;
 		}
-			
+		
 		form{
-			
+			width: 100%;
 			padding-top: 20px;
-			margin-left: 13px;
+			margin-left: -10px;
 		}
 		
 		#botonEnviar{
-			margin-top: 40px;
-			margin-left: 90px;
+			margin-top: 20px;
+			margin-left: 80px;
 			padding: 7px;
 			padding-left: 20px;
 			padding-right: 20px;
@@ -67,40 +66,59 @@
 			
 			font-size: 14px;
 			padding: 5px;
+			
 		}
+		
+		#botonEnviar{
+			
+		
+			margin-top: 50px;
+			margin-left: 90px;
+			padding: 7px;
+			padding-left: 20px;
+			padding-right: 20px;
+			font-size: 14px;
+			background-color: #69B2FF;
+		}
+		
 	
 	</style>
 </head>
-
-<body onmousemove="reiniciarTimeout(60)" onkeypress="reiniciarTimeout(60)" onload="iniciarTimeout(60)">
-
-<body>
-
+<<<<<<< HEAD
+<body onmousemove="reiniciarTimeout(60)" onkeypress="reiniciarTimeout(60)" onload="iniciarTimeout(60)" bgcolor="#ADD5FF">
+=======
+<body bgcolor="#ADD5FF">
+>>>>>>> 19e4882e662a35391f31c694d1ce5a8883ca485d
 	<div>
-	<h2>Inserción tareas</h2>
+	<h2>Resgistro usuario</h2>
 	<form>
-		<table width="50%">
+		<table width="100%">
   <tbody>
+    <tr>
+      <td>DAS</td>
+      <td><input type="text"></td>
+    </tr>
     <tr>
       <td>NOMBRE</td>
       <td><input type="text"></td>
     </tr>
-	  
     <tr>
-      <td>DESCRIPCION</td>
+      <td>APELLIDOS</td>
       <td><input type="text"></td>
     </tr>
-	  
     <tr>
-      <td>ESTADO</td>
+      <td>EMAIL</td>
+      <td><input type="text"></td>
+    </tr>
+    <tr>
+      <td>PERMISOS</td>
       <td><input type="text"></td>
     </tr>
   </tbody>
 </table>
-
-		<input id="botonEnviar" type="submit">
+	<input id="botonEnviar" type="submit">
 	</form>
 	</div>
-	
 </body>
 </html>
+
