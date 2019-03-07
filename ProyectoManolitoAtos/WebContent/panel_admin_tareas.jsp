@@ -169,6 +169,14 @@
 			margin-top: 1px;
 			
 		}	
+		
+		#cerrarSesion{
+					
+			heigth: 30px; 					
+			width: 200px;	
+			margin-left: 300px;
+			margin-top: -100px;		
+		}
 	
 	</style>
 </head>
@@ -185,16 +193,21 @@
 	<div id="marcoInfo">
 		
 		<h3>DATOS ADMINISTRADOR</h3>
-		<p>DAS:</p><input type="text" value="${das}">
-		<p>NOMBRE:</p><input type="text" value="${nombre}">
-		<p>APELLIDO:</p><input type="text" value="${apellido}">
-		<p>E-MAIL:</p><input type="text" value="${email}">
+		<p>DAS:</p><input type="text" value="${das}" readonly>
+		<p>NOMBRE:</p><input type="text" value="${nombre}" readonly>
+		<p>APELLIDO:</p><input type="text" value="${apellido}" readonly>
+		<p>E-MAIL:</p><input type="text" value="${email}" readonly>
 		
 		<div id="imagenUser">
 			<div id="img"><img width="160px" src="img/User_icon_2.svg.png"></div>
 		</div>
-		
-	
+<!-- 		<input type="button" value="Cerrar Sesión" name="instruccion" id="contra"> -->
+		<br>
+		<div id="cerrarSesion">
+		<form  action="Controlador" method="post">
+			<button  type="submit" value="logout" name="instruccion">Cerrar sesión</button>
+		</form>
+		</div>
 	</div>
 	<div id="marcoOperaciones">
 		

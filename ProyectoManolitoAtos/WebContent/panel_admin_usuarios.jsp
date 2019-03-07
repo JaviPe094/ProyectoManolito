@@ -173,6 +173,14 @@
 			margin-top: 1px;
 			
 		}
+		
+		#cerrarSesion{
+		
+			heigth: 30px; 					
+			width: 200px;	
+			margin-left: 300px;
+			margin-top: -100px;	
+		}
 				
 	
 	</style>
@@ -200,6 +208,12 @@
 			<div id="img"><img width="160px" src="img/User_icon_2.svg.png"></div>
 		</div>
 		
+		<br>
+		<div id="cerrarSesion">
+		<form  action="Controlador" method="post">
+			<button  type="submit" value="logout" name="instruccion">Cerrar sesión</button>
+		</form>
+		</div>
 	
 	</div>
 	<div id="marcoOperaciones">
