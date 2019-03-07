@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -33,7 +34,7 @@ public class EmpleadoUtil {
 		
 		random = new Random();
 		
-		File storedFile = new File("../resources.txt");
+		File storedFile = new File("resources");
 		
 		if (!storedFile.exists()) {
 			
@@ -53,20 +54,8 @@ public class EmpleadoUtil {
 		
 		else {
 			
-			try {
-				
-				generateKey(storedFile);
-				
-			} catch (NoSuchAlgorithmException nsae) {
-				
-				nsae.printStackTrace();
-				
-			} catch (IOException ioe) {
-				
-				ioe.printStackTrace();
-				
-			}
-			
+			getKey(storedFile);
+
 		}
 		
 	}
@@ -94,11 +83,9 @@ public class EmpleadoUtil {
 			
 			Cipher cipher = Cipher.getInstance("AES");
 			cipher.init(Cipher.ENCRYPT_MODE, key);
-			byte[] encriptado = cipher.doFinal(textInput.getBytes());
-
-			for (byte b : encriptado)
-				result += Integer.toHexString(0xFF & b);
-				
+			
+			return Base64.getEncoder().encodeToString(cipher.doFinal(textInput.getBytes("UTF-8")));
+							
 		} catch (NoSuchPaddingException nspe) {
 			
 			nspe.printStackTrace();
@@ -119,6 +106,10 @@ public class EmpleadoUtil {
 			
 			ibsq.printStackTrace();
 			
+		} catch (UnsupportedEncodingException uee) {
+			
+			uee.printStackTrace();
+			
 		}
 		
 		return result;
@@ -133,11 +124,9 @@ public class EmpleadoUtil {
 			
 			Cipher cipher = Cipher.getInstance("AES");
 			cipher.init(Cipher.DECRYPT_MODE, key);
-			byte[] encriptado = cipher.doFinal(textInput.getBytes());
-
-			for (byte b : encriptado)
-				result += Integer.toHexString(0xFF & b);
-				
+			
+            return new String(cipher.doFinal(Base64.getDecoder().decode(textInput)));
+							
 		} catch (NoSuchPaddingException nspe) {
 			
 			nspe.printStackTrace();
@@ -191,17 +180,20 @@ public class EmpleadoUtil {
 		
 	}
 	
-	private void getKey(File storedFile) {
+	private static void getKey(File storedFile) {
 		
 		BufferedReader br = null;
+		FileReader fr = null;
 		
 		try {
 			
-			FileReader fr = new FileReader(storedFile);
+			fr = new FileReader(storedFile);
 			
 			br = new BufferedReader(fr);
 			
-			String encodedKey = br.readLine();
+			String encodedKey = "";
+			
+			encodedKey = br.readLine();
 			
 			byte[] keyBytes = Base64.getDecoder().decode(encodedKey);
 			
@@ -218,8 +210,11 @@ public class EmpleadoUtil {
 		} finally {
 			
 			if (br != null) {
+				
 				try {
 					br.close();
+					fr.close();
+					
 				} catch (IOException ioe) {
 					ioe.printStackTrace();
 				}

@@ -37,6 +37,7 @@ public class TestDAO {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		/*
 		EmpleadoDAO edao=new EmpleadoDAOImpl();
 		TareasDAO tdao=new TareasDAOImpl();
 		PermisosDAO pdao=new PermisosDAOImpl();
@@ -70,13 +71,14 @@ public class TestDAO {
 //		System.out.println(EmpleadoUtil.generatePass(15));
 //		System.out.println(EmpleadoUtil.generatePass(5));
 		
-<<<<<<< HEAD
+
 		/*
 		System.out.println(EmpleadoUtil.generatePass(10));
 		System.out.println(EmpleadoUtil.generatePass(20));
 		System.out.println(EmpleadoUtil.generatePass(15));
 		System.out.println(EmpleadoUtil.generatePass(5));
 		*/
+		
 		
 		String enClaro = "Hola, soy un string";
 		
@@ -86,10 +88,6 @@ public class TestDAO {
 		
 		System.out.println(EmpleadoUtil.desencriptaString(encriptado));
 		
-
-=======
-		datosPruebaInsertTareas(10, "tarea_", tdao, esdao.read('a'));
->>>>>>> d6d5d26d8c27dd9d5474d6d53b243aa7a9640ba0
 	}
 
 }
