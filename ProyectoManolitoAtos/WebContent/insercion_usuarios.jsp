@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
 <!doctype html>
 <html>
 <head>
@@ -86,6 +89,12 @@
 	<form action="Controlador" method="post">
 		<table width="100%">
   <tbody>
+  	<%
+	String msg = (String) request.getSession().getAttribute("msg");
+	if(msg != null && !msg.isEmpty()){%>
+		<span style="color:#B40404">${msg}</span>
+	<%}%>
+  
     <tr>
       <td>DAS</td>
       <td><input type="text" name="das" id="das"></td>

@@ -167,13 +167,26 @@ public class Controlador extends HttpServlet {
 			String email = request.getParameter("email");
 			String per = request.getParameter("permisos");
 			System.out.println(per);
+		
+			Empleados test = new EmpleadoDAOImpl().read(das);
+		
+			if (test == null) {
 			
+				Empleados newEmpleado = new Empleados(das, EmpleadoUtil.generatePass(8), nombre, apellido, 
+						email, new EstadoDAOImpl().read('n'), new PermisosDAOImpl().read(per));
+				
+				dao.create(newEmpleado);
+				
+				enviarInfoPanelAdmin(request, response);
+				
+			}
 			
-			
-			Empleados newEmpleado = new Empleados(das, EmpleadoUtil.generatePass(8), nombre, apellido, 
-					email, new EstadoDAOImpl().read('n'), new PermisosDAOImpl().read(per));
-			
-			dao.create(newEmpleado);
+			else {
+				
+				request.getSession().setAttribute("msg", "Lo lamentamos, este DAS ya está en uso");
+				response.sendRedirect("insercion_usuarios.jsp");
+				
+			}
 			
 			break;
 			
@@ -343,7 +356,7 @@ public class Controlador extends HttpServlet {
 	private void enviarInfoPanelAdmin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String das = userLogin.getDas();
+		/*String das = userLogin.getDas();
 		String nombre = userLogin.getNombre();
 		String apellido = userLogin.getApellido();
 		String email = userLogin.getEmail();
@@ -353,8 +366,45 @@ public class Controlador extends HttpServlet {
 		request.setAttribute("apellido", apellido);
 		request.setAttribute("email", email);
 
-		RequestDispatcher requesDis = request.getRequestDispatcher("panel_administrador.jsp");
+		//RequestDispatcher requesDis = request.getRequestDispatcher("panel_administrador.jsp");
+		//RequestDispatcher requesDis = request.getRequestDispatcher("panel_admin_usuarios.jsp");
+		//requesDis.forward(request, response);
+		
+		try {
+			enviarInfoPanel(request, response);
+
+			List<Tareas> listaTareas = tareasDAO.seleccionaTodos();
+
+			System.out.println(listaTareas);
+
+			request.setAttribute("LISTARTAREAS", listaTareas);
+
+			RequestDispatcher miDispaTareas = request.getRequestDispatcher("/panel_admin_tareas.jsp");
+
+			miDispaTareas.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		String das = userLogin.getDas();
+		String nombre = userLogin.getNombre();
+		String apellido = userLogin.getApellido();
+		String email = userLogin.getEmail();
+
+		request.setAttribute("das", das);
+		request.setAttribute("nombre", nombre);
+		request.setAttribute("apellido", apellido);
+		request.setAttribute("email", email);
+		
+		List<Tareas> listaTareas = tareasDAO.seleccionaTodos();
+
+		//System.out.println(listaTareas);
+
+		request.setAttribute("LISTARTAREAS", listaTareas);
+
+		RequestDispatcher requesDis = request.getRequestDispatcher("/panel_admin_tareas.jsp");
 		requesDis.forward(request, response);
+		
+		
 
 	}
 	
