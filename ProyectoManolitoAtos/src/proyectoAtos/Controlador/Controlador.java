@@ -208,10 +208,10 @@ public class Controlador extends HttpServlet {
 
 		userLogin.setEstado(estadoDAO.read('a'));
 
-		userLogin.setPassword(pass);
+		userLogin.setPassword(EmpleadoUtil.crearSHA1(pass));
 		dao.update(userLogin);
 
-		return userLogin.getPassword().equals(pass);
+		return userLogin.getPassword().equals(EmpleadoUtil.crearSHA1(pass));
 
 	}
 
@@ -226,24 +226,27 @@ public class Controlador extends HttpServlet {
 
 			userLogin = dao.read(user);
 
-			if (userLogin != null && userLogin.getPassword().equals(pass)) {
-
-				if ((userLogin.getPermiso().getNombre()).equals("admin")) {
-					esAdmin(request, response);
+			if (userLogin != null) {
+				
+				if (userLogin.getEstado().getEstado() == Recursos.NUEVO) {
+					
+					if (userLogin.getPassword().equals(pass)) {
+						
+						loginComun(request, response);
+						
+					}
+					
+					
 				}
-
-				else if ((userLogin.getPermiso().getNombre()).equals("basico")) {
-
-					if ((userLogin.getEstado().getEstado()) == Recursos.NUEVO) {
-
-						response.sendRedirect("nueva_contrasena.html");
-
+				
+				else {
+					
+					if (userLogin.getPassword().equals(EmpleadoUtil.crearSHA1(pass))) {
+						
+						loginComun(request, response);
+						
 					}
-
-					else {
-
-						enviarInfoPanelUser(request, response);
-					}
+					
 				}
 
 			}
@@ -301,6 +304,29 @@ public class Controlador extends HttpServlet {
 		
 		request.getSession().invalidate();
 		response.sendRedirect("formulario_login.jsp");
+		
+	}
+	
+	private void loginComun(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException{
+		
+		if ((userLogin.getPermiso().getNombre()).equals("admin")) {
+			esAdmin(request, response);
+		}
+
+		else if ((userLogin.getPermiso().getNombre()).equals("basico")) {
+
+			if ((userLogin.getEstado().getEstado()) == Recursos.NUEVO) {
+
+				response.sendRedirect("nueva_contrasena.html");
+
+			}
+
+			else {
+
+				enviarInfoPanelUser(request, response);
+			}
+		}
 		
 	}
 
