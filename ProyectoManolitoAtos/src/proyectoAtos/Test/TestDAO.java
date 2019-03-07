@@ -78,7 +78,7 @@ public class TestDAO {
 		System.out.println(EmpleadoUtil.generatePass(5));
 		*/
 		
-		String enClaro = "Hola, soy un string";
+		String enClaro = "contraseña";
 		
 		String encriptado = EmpleadoUtil.encriptaString(enClaro);
 		
