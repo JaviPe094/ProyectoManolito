@@ -117,7 +117,11 @@ public class Controlador extends HttpServlet {
 			}
 
 			else {
+				
 				System.out.println("FALLO AL CAMBIAR PASSWORD");
+				request.getSession().setAttribute("msg", "Disculpe, esta clave no es válida");
+				response.sendRedirect("nueva_contrasena.jsp");
+				
 			}
 
 			break;
@@ -208,6 +212,12 @@ public class Controlador extends HttpServlet {
 
 		String pass = request.getParameter("contrasena");
 
+		if (pass.isEmpty()) {
+			
+			return false;
+			
+		}
+		
 		userLogin.setEstado(estadoDAO.read('a'));
 
 		userLogin.setPassword(EmpleadoUtil.crearSHA1(pass));
@@ -290,7 +300,7 @@ public class Controlador extends HttpServlet {
 
 		if ((userLogin.getEstado().getEstado()) == Recursos.NUEVO) {
 
-			response.sendRedirect("nueva_contrasena.html");
+			response.sendRedirect("nueva_contrasena.jsp");
 
 		} else {
 			enviarInfoPanelAdmin(request, response);
@@ -335,7 +345,7 @@ public class Controlador extends HttpServlet {
 
 			if ((userLogin.getEstado().getEstado()) == Recursos.NUEVO) {
 
-				response.sendRedirect("nueva_contrasena.html");
+				response.sendRedirect("nueva_contrasena.jsp");
 
 			}
 

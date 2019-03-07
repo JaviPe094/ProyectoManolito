@@ -25,7 +25,7 @@ public class Test2 {
 		PermisosDAO pdao = new PermisosDAOImpl();
 		
 		
-		Empleados test = new Empleados("004", EmpleadoUtil.generatePass(3), 
+		Empleados test = new Empleados("006", EmpleadoUtil.generatePass(3), 
 				"test", "test", "a@a.a", esdao.read(Recursos.NUEVO), pdao.read("admin"));
 		
 		edao.create(test);

@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
 <!doctype html>
 <html>
 <head>
@@ -68,6 +71,12 @@
 </head>
 <body bgcolor="#ADD5FF">
 	<div>
+	<%
+	String msg = (String) request.getSession().getAttribute("msg");
+	if(msg != null && !msg.isEmpty()){%>
+		<span style="color:#B40404">${msg}</span>
+	<%}%>
+	
 	<h2>Nueva contraseña</h2>
 	<form action="Controlador" method="post">
 	<input type="hidden" name="instruccion" value="usuarioAceptado">
