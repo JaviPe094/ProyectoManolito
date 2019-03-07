@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>formulario_login</title>
+<title>Insercion Usuarios</title>
 	<style type="text/css">
 	html{
 		
@@ -37,9 +35,9 @@
 		}
 		
 		form{
-			
+			width: 100%;
 			padding-top: 20px;
-			margin-left: 13px;
+			margin-left: -10px;
 		}
 		
 		#botonEnviar{
@@ -65,28 +63,54 @@
 			font-size: 14px;
 			padding: 5px;
 			
-		}		
-	 
+		}
+		
+		#botonEnviar{
+			
+		
+			margin-top: 50px;
+			margin-left: 90px;
+			padding: 7px;
+			padding-left: 20px;
+			padding-right: 20px;
+			font-size: 14px;
+			background-color: #69B2FF;
+		}
+		
+	
 	</style>
 </head>
 <body bgcolor="#ADD5FF">
 	<div>
-	<h2>LOGIN</h2>
-	<form name="form1" method="post" action="Controlador">
-	<input type="hidden" name="instruccion" value="validar">
-	<%
-	String msg = (String) request.getSession().getAttribute("msg");
-	if(msg != null && !msg.isEmpty()){%>
-		<span style="color:#B40404">${msg}</span>
-	<%}%>
-		<p>Usuario</p>
-		<input type="text" name="usuario" id="usuario"  required="required"> 
-		<br>
-		<p>Contraseña</p>
-		<input type="password" name="contra" id="contra"  required="required">
-		<br><br>
-		<input id="botonEnviar" type="submit" value="Aceptar">
+	<h2>Resgistro usuario</h2>
+	<form>
+		<table width="100%">
+  <tbody>
+    <tr>
+      <td>DAS</td>
+      <td><input type="text"></td>
+    </tr>
+    <tr>
+      <td>NOMBRE</td>
+      <td><input type="text"></td>
+    </tr>
+    <tr>
+      <td>APELLIDOS</td>
+      <td><input type="text"></td>
+    </tr>
+    <tr>
+      <td>EMAIL</td>
+      <td><input type="text"></td>
+    </tr>
+    <tr>
+      <td>PERMISOS</td>
+      <td><input type="text"></td>
+    </tr>
+  </tbody>
+</table>
+	<input id="botonEnviar" type="submit">
 	</form>
 	</div>
 </body>
 </html>
+

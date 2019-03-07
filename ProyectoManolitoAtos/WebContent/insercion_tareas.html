@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>formulario_login</title>
+<title>Inserccion Tareas</title>
+	
 	<style type="text/css">
-	html{
+		html{
 		
 		background-color: #648CE9;
 	}
@@ -15,8 +14,8 @@
 		border: solid #223DBB 3px;
 		margin:20px auto auto;
 		background-color: white;
-		width: 300px;	
-		height: 345px;
+		width: 340px;	
+		height: 290px;
 		padding: 10px;
 		
 	}
@@ -25,7 +24,7 @@
 		div{
 			position: absolute;
 			background-color: #167CDC;
-			width: 258px;
+			width: 300px;
 			padding: 20px;
 			margin-top: 40px;
 		}
@@ -35,7 +34,7 @@
 			margin-top: -60px;
 			border-bottom: dotted #0055AF;
 		}
-		
+			
 		form{
 			
 			padding-top: 20px;
@@ -43,8 +42,8 @@
 		}
 		
 		#botonEnviar{
-			margin-top: 20px;
-			margin-left: 80px;
+			margin-top: 40px;
+			margin-left: 90px;
 			padding: 7px;
 			padding-left: 20px;
 			padding-right: 20px;
@@ -64,29 +63,36 @@
 			
 			font-size: 14px;
 			padding: 5px;
-			
-		}		
-	 
+		}
+	
 	</style>
 </head>
-<body bgcolor="#ADD5FF">
+<body>
 	<div>
-	<h2>LOGIN</h2>
-	<form name="form1" method="post" action="Controlador">
-	<input type="hidden" name="instruccion" value="validar">
-	<%
-	String msg = (String) request.getSession().getAttribute("msg");
-	if(msg != null && !msg.isEmpty()){%>
-		<span style="color:#B40404">${msg}</span>
-	<%}%>
-		<p>Usuario</p>
-		<input type="text" name="usuario" id="usuario"  required="required"> 
-		<br>
-		<p>Contraseña</p>
-		<input type="password" name="contra" id="contra"  required="required">
-		<br><br>
-		<input id="botonEnviar" type="submit" value="Aceptar">
+	<h2>Inserción tareas</h2>
+	<form>
+		<table width="50%">
+  <tbody>
+    <tr>
+      <td>NOMBRE</td>
+      <td><input type="text"></td>
+    </tr>
+	  
+    <tr>
+      <td>DESCRIPCION</td>
+      <td><input type="text"></td>
+    </tr>
+	  
+    <tr>
+      <td>ESTADO</td>
+      <td><input type="text"></td>
+    </tr>
+  </tbody>
+</table>
+
+		<input id="botonEnviar" type="submit">
 	</form>
 	</div>
+	
 </body>
 </html>

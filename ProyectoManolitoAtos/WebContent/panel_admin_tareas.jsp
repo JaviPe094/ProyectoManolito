@@ -1,8 +1,10 @@
 <!doctype html>
+<%@page import="java.util.List"%>
+<%@page import="proyectoAtos.Entidades.Tareas"%>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Panel Usuario</title>
+<title>Panel Administracion Usuarios</title>
 	<style type="text/css">
 		
 			html{
@@ -81,7 +83,7 @@
 		}
 		
 		#marcoOperaciones{
-			position: relative;
+			position: absolute;
 			float: right;
 			background-color: #167CDC;
 			margin-top: -340px;
@@ -98,20 +100,25 @@
 		#parteAbajo{
 			
 			position: absolute;
+			width: 950px;
+			height: 40px;
+			margin-top: 5px;
 		}
 		#marcoTareas{
-			position: absolute;
+			position: relative;
 			background-color: #167CDC;
-			width: 950px;
-			height: 400px;
-			margin-top: 350px;
+			width: 100%;
+			height: 390px;
+			margin-top: 10px;
 		}
 		
 		#fondoTabla{
-			position: relative;
+			position: absolute;
 			background-color: #FFFFFF;
-			margin: 40px;
-			height: 320px;
+			margin-top:20px;
+			margin-left:50px;
+			height: 350px;
+			width: 90%;
 		}
 		
 		#titulo{
@@ -137,9 +144,9 @@
 		#botonAccionUser{
 			
 			position: relative;
-			margin-top: 150px;
+			margin-top: 100px;
 			width: 300px;
-			margin-left: 100px;
+			margin-left: 60px;
 			
 		}
 		
@@ -148,17 +155,38 @@
 			width: 100%;
 		}
 		
+		#botonesAccion{
+			
+			position: absolute;
+			margin-top: 740px;
+			margin-left: 50px;
+		}
+		
+		#tabla{
+			position: absolute;
+			width: 100%;
+			margin-top: 1px;
+			
+		}
+		
 		
 	
 	</style>
 </head>
+
+<%
+	//obtener los registros de Empleados
+	List<Tareas> listaTareas = (List<Tareas>) request.getAttribute("LISTARTAREAS");
+%>
+
+
 <body bgcolor="#ADD5FF">
 	
 	<div id="cabecera">
 	
 	<div id="marcoInfo">
 		
-		<h3>DATOS USUARIO</h3>
+		<h3>DATOS ADMINISTRADOR</h3>
 		<p>DAS:</p><input type="text" value="${das}">
 		<p>NOMBRE:</p><input type="text" value="${nombre}">
 		<p>APELLIDO:</p><input type="text" value="${apellido}">
@@ -172,12 +200,16 @@
 	</div>
 	<div id="marcoOperaciones">
 		
-		<div id="titulo"><div id="operaciones">Operaciones</div></div>
+		<div id="titulo"><div id="operaciones">Operaciones</div>
 		
 		<div id="botonAccionUser">
-			
-			<input type="submit" value="Hacer algo">
-		
+			<form action="Controlador" method="post">
+			<input type="submit" value="VISTA USUARIOS">
+			<input type="hidden" name="instruccion" value="listarEmpleados">
+			<br><br>
+			<input type="submit" value="VISTA TAREAS">
+			<input type="hidden" name="instruccion" value="listarTareas">
+			</form>
 		</div>
 	
 	</div>
@@ -190,49 +222,31 @@
 			
 			<table width="100%" border="2">
   <tbody>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+   <tr>
+      <th>NOMBRE</th>
+      <th>DESCRIPCION</th>
+      <th>ESTADO</th>
     </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+    
+    <% for(Tareas tare : listaTareas){%>
+
+		 <tr>
+		 	<td><%=tare.getNombre()%></td>
+		 	<td><%=tare.getDescripcion()%></td>
+		 	<td><%=tare.getEstado()%></td>
+		 	
+		 
     </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
+    <%} %>
   </tbody>
 </table>
 
 			
-		</div>
 	</div>
 	</div>
-		
-		
+	<div id="botonesAccion"><input type="submit" value="Insertar Tarea">&nbsp;&nbsp;&nbsp;
+		<input type="submit" value="Borrar Tarea"></div>
+	</div>
+			
 </body>
 </html>

@@ -175,11 +175,13 @@
 		<div id="titulo"><div id="operaciones">Operaciones</div></div>
 		
 		<div id="botonAccionUser">
-			
+			<form action="Controlador" method="post"	>
 			<input type="submit" value="VISTA USUARIOS">
+			<input type="hidden" name="instruccion" value="listarEmpleados">
 			<br><br>
 			<input type="submit" value="VISTA TAREAS">
-		
+			<input type="hidden" name="instruccion" value="listarTareas">
+			</form>
 		</div>
 	
 	</div>
