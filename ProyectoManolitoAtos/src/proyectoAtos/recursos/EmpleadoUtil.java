@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.BadPaddingException;
@@ -19,6 +20,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
 
 import java.util.Base64;
 import java.util.Random;
@@ -34,6 +36,7 @@ public class EmpleadoUtil {
 		
 		random = new Random();
 		
+		/*
 		File storedFile = new File("resources");
 		
 		if (!storedFile.exists()) {
@@ -57,6 +60,7 @@ public class EmpleadoUtil {
 			getKey(storedFile);
 
 		}
+		*/
 		
 	}
 	
@@ -223,5 +227,31 @@ public class EmpleadoUtil {
 		
 	}
 
-
+	public static String crearSHA1(String textInput) {
+		
+		String res = "";
+		
+		try {
+			
+			MessageDigest md = MessageDigest.getInstance("SHA-1");
+			md.reset();
+			md.update(textInput.getBytes("UTF-8"), 0, textInput.length());
+			
+			res = DatatypeConverter.printHexBinary(md.digest());
+			
+		} catch (NoSuchAlgorithmException nsae) {
+			
+			nsae.printStackTrace();
+			
+		} catch (UnsupportedEncodingException usee) {
+			
+			usee.printStackTrace();
+			
+		}
+		
+		return res;
+		
+	}
+	
+	
 }

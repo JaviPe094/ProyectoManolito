@@ -23,7 +23,11 @@ import proyectoAtos.Modelo.EstadoDAO;
 import proyectoAtos.Modelo.EstadoDAOImpl;
 import proyectoAtos.Modelo.TareasDAO;
 import proyectoAtos.Modelo.TareasDAOImpl;
+<<<<<<< HEAD
 import proyectoAtos.recursos.Recursos;
+=======
+import proyectoAtos.recursos.*;;
+>>>>>>> 19e4882e662a35391f31c694d1ce5a8883ca485d
 
 /**
  * Servlet implementation class Controlador

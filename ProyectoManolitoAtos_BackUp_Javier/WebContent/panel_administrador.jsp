@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
 <head>
+<script src="js/Timeout.js">
+</script>
 <meta charset="utf-8">
 <title>Panel Administrador</title>
 	<style type="text/css">
@@ -152,7 +154,7 @@
 	
 	</style>
 </head>
-<body bgcolor="#ADD5FF">
+<body onmousemove="reiniciarTimeout(60)" onkeypress="reiniciarTimeout(60)" onload="iniciarTimeout(60)" bgcolor="#ADD5FF">
 	
 	<div id="cabecera">
 	
@@ -173,7 +175,7 @@
 	<div id="marcoOperaciones">
 		
 		<div id="titulo"><div id="operaciones">Operaciones</div></div>
-		
+
 		<div id="botonAccionUser">
 			<form action="Controlador" method="post"	>
 			<input type="submit" value="VISTA USUARIOS">
