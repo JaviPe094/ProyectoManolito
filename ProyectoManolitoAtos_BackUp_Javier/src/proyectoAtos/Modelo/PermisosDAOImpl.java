@@ -1,8 +1,11 @@
 package proyectoAtos.Modelo;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import proyectoAtos.Entidades.Permisos;
 
@@ -85,4 +88,26 @@ public class PermisosDAOImpl implements PermisosDAO{
 			em.close();
 		}
 	}
+	
+	@Override
+	public List<Permisos> seleccionaTodos() {
+		
+		EntityManager em = emf.createEntityManager();
+		
+		try {
+
+			Query query = em.createNamedQuery("Permisos.seleccionaTodos");
+			
+			return query.getResultList();
+
+		} finally {
+			
+			if (em != null) {
+
+				em.close();
+			}
+		}
+		
+	}
+	
 }
