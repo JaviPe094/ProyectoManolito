@@ -92,23 +92,30 @@
     </tr>
     <tr>
       <td>NOMBRE</td>
-      <td><input type="text" name="nombre" id="nombre" value="${nombre}"></td>
+      <td><input type="text" name="nombre" id="nombre" value="${nombre}" required></td>
     </tr>
     <tr>
       <td>APELLIDOS</td>
-      <td><input type="text" name="apellidos" id="apellidos" value="${apellido}"></td>
+      <td><input type="text" name="apellidos" id="apellidos" value="${apellido}" required></td>
     </tr>
     <tr>
       <td>EMAIL</td>
-      <td><input type="email" name="email" id="email" value="${email}"></td>
+      <td><input type="email" name="email" id="email" value="${email}" required></td>
     </tr>
      <tr>
       <td>ESTADO</td>
-      <td><input type="text" name="estado" id="estado" value="${estado}"></td>
+      <td><input type="text" name="estado" id="estado" value="${estado}" required></td>
     </tr>
     <tr>
       <td>PERMISOS</td>
-      <td><input type="text" name="permisos" id="permisos" value="${permisos}"></td>
+      
+<%--       <td><input type="text" name="permisos" id="permisos" value="${permisos}" required></td> --%>
+
+		<label><input type="radio" name="permisos" value="admin" id="permisos_1">Admin</label>
+        <br>
+        <label><input type="radio" name="permisos" value="basico" id="permisos_2" checked>Basic</label>
+        <br>
+
     </tr>
   </tbody>
 </table>

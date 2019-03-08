@@ -113,6 +113,7 @@
 		}
 		
 		#fondoTabla{
+			overflow: scroll;
 			position: absolute;
 			background-color: #FFFFFF;
 			margin-top:20px;
@@ -178,13 +179,7 @@
 			margin-top: -100px;		
 		}
 		
-		#dt{
-			
-			overflow: scroll;
-			heigth: 100%;
 		
-		}
-	
 	</style>
 </head>
 
@@ -241,7 +236,7 @@
 	<div id="marcoTareas">
 		<div id="fondoTabla">
 			
-			<div id=dt>
+			
 			<table width="100%" border="2">
   <tbody>
    <tr>
@@ -259,14 +254,13 @@
 		 	<td><%=tare.getEstado().getEstado()%></td>
 		 	<td><button name="actualizar" value="<%=tare.getNombre()%>" type="submit">Actualizar</button>
 		 		<button name="borrar" value="<%=tare.getNombre()%>" type="submit">Borrar</button>
-		 	</td>
-		 	
-		 
-    </tr>
+		 	</td>		 			 
+    	</tr>
     <%} %>
+    </form>
   </tbody>
 </table>
-</div>
+
 
 	</div>
 	</div>

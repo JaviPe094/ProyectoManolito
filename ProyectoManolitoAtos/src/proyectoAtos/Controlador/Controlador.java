@@ -199,10 +199,7 @@ public class Controlador extends HttpServlet {
 				//userLogin=dao.read(newEmpleado.getDas());
 				
 				mostrar_informacion(request,response,newEmpleado);
-				
-				
-			
-				
+					
 			}
 			
 			else {
@@ -211,12 +208,6 @@ public class Controlador extends HttpServlet {
 				response.sendRedirect("insercion_usuarios.jsp");
 				
 			}
-			
-			
-			
-			
-			
-			
 			
 			break;
 			
@@ -384,33 +375,21 @@ public class Controlador extends HttpServlet {
 			requesDis.forward(request, response);
 		}else {
 			
+			//enviarInfoPanel(request, response);
+			
+			String das = userLogin.getDas();
+			String nombre = userLogin.getNombre();
+			String apellido = userLogin.getApellido();
+			String email = userLogin.getEmail();
+
+			request.setAttribute("das", das);
+			request.setAttribute("nombre", nombre);
+			request.setAttribute("apellido", apellido);
+			request.setAttribute("email", email);
 			
 			Borrar(request,response);
 		}
-//		String cod  = request.getParameter("actualizar");
-		
-//		cod=request.getParameter("borrar");
-//		String aux= request.getParameter("borrar");
-//		System.out.println(aux);
-//		aux= request.getParameter("actualizar");
-//		System.out.println(aux);
-//		userLogin = dao.read(cod);
-//		
-//		String codigo = userLogin.getDas();
-//		String nombre = userLogin.getNombre();
-//		String apellido = userLogin.getApellido();
-//		String email = userLogin.getEmail();
-//		char estado = userLogin.getEstado().getEstado();
-//		String permisos = userLogin.getPermiso().getNombre();
-//		request.setAttribute("das", codigo);
-//		request.setAttribute("nombre", nombre);
-//		request.setAttribute("apellido", apellido);
-//		request.setAttribute("email", email);
-//		request.setAttribute("estado", estado);
-//		request.setAttribute("permisos", permisos);
-//		
-//		RequestDispatcher requesDis = request.getRequestDispatcher("actualizar_usuario.jsp");
-//		requesDis.forward(request, response);
+
 	}
 	
 	private void Borrar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -419,7 +398,7 @@ public class Controlador extends HttpServlet {
 		String cod = request.getParameter("borrar");
 		
 		dao.delete(cod);
-		
+				
 		List<Empleados> listaEmpleados = dao.seleccionaTodos();
 
 		request.setAttribute("LISTAREMPLEADOS", listaEmpleados);
@@ -450,15 +429,9 @@ public class Controlador extends HttpServlet {
 	private void enviarInfoPanelUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String das = userLogin.getDas();
-		String nombre = userLogin.getNombre();
-		String apellido = userLogin.getApellido();
-		String email = userLogin.getEmail();
-
-		request.setAttribute("das", das);
-		request.setAttribute("nombre", nombre);
-		request.setAttribute("apellido", apellido);
-		request.setAttribute("email", email);
+		// Código repetido. Refactorizar. Utilizar enviarInfoPanel normal + listar tareas
+		
+		enviarInfoPanel(request, response);
 		
 		List<Tareas> listaTareas = tareasDAO.seleccionaTodos();
 
