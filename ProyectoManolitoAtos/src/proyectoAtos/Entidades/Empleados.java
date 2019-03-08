@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @NamedQueries({
 
-	//@NamedQuery(name="Empleados.seleccionaTodos", query="SELECT e FROM Empleados e"),
+	@NamedQuery(name="Empleados.seleccionaTodos", query="SELECT e FROM Empleados e"),
 	@NamedQuery(name="Empleados.filtrarDAS", query="SELECT e FROM Empleados e WHERE e.das= :name"),
 	@NamedQuery(name="Empleados.filtrarNombre", query="SELECT e FROM Empleados e WHERE e.nombre= :name"),
 	@NamedQuery(name="Empleados.filtrarApellido", query="SELECT e FROM Empleados e WHERE e.apellido= :name"),
