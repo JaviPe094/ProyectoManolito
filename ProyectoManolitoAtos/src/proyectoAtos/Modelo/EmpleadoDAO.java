@@ -16,6 +16,12 @@ public interface EmpleadoDAO {
 	
 	public List<Empleados> seleccionaTodos();
 	
-	public List<Empleados> filtrar(String filtro);
+	public List<Empleados> filtrarNombre( String valor);
+	
+	public List<Empleados> filtrarApellido(String valor);
+	
+	public List<Empleados> filtrarEstado(String valor);
+	
+	public List<Empleados> filtrarPermisos(String valor);
 
 }
