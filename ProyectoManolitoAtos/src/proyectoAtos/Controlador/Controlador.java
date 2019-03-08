@@ -88,7 +88,7 @@ public class Controlador extends HttpServlet {
 
 			System.out.println("El comando esta vacio");
 
-			response.sendRedirect("formulario_login.html");
+			response.sendRedirect("formulario_login.jsp");
 
 			return;
 
@@ -143,7 +143,17 @@ public class Controlador extends HttpServlet {
 
 		case "listarTareas":
 			try {
-				enviarInfoPanel(request, response);
+				//enviarInfoPanel(request, response);
+				
+				String das = userLogin.getDas();
+				String nombre = userLogin.getNombre();
+				String apellido = userLogin.getApellido();
+				String email = userLogin.getEmail();
+
+				request.setAttribute("das", das);
+				request.setAttribute("nombre", nombre);
+				request.setAttribute("apellido", apellido);
+				request.setAttribute("email", email);
 
 				List<Tareas> listaTareas = tareasDAO.seleccionaTodos();
 
@@ -196,10 +206,45 @@ public class Controlador extends HttpServlet {
 			String nomb = request.getParameter("nombre");
 			String descripcion = request.getParameter("descripcion");
 			char estado = request.getParameter("estado").charAt(0);
+
+			Tareas testTarea = new TareasDAOImpl().read(nomb);
 			
-			Tareas newTareas = new Tareas(nomb, descripcion, new EstadoDAOImpl().read(estado));
+			if (testTarea == null) {
 			
-			tareasDAO.create(newTareas);
+				Tareas newTareas = new Tareas(nomb, descripcion, new EstadoDAOImpl().read(estado));
+				
+				tareasDAO.create(newTareas);
+				
+				// Refactorizar este código!
+				
+				try {
+					enviarInfoPanel(request, response);
+
+					List<Tareas> listaTareas = tareasDAO.seleccionaTodos();
+
+					System.out.println(listaTareas);
+
+					request.setAttribute("LISTARTAREAS", listaTareas);
+
+					RequestDispatcher miDispaTareas = request.getRequestDispatcher("/panel_admin_tareas.jsp");
+
+					miDispaTareas.forward(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				//response.sendRedirect("panel_admin_tareas.jsp");
+				
+			}
+			
+			else {
+				
+				request.getSession().setAttribute("msg", "Lo lamentamos, este nombre de tarea ya está en uso");
+				response.sendRedirect("insercion_tareas.jsp");
+				
+			}
+			
+			break;
 			
 		case "logout":
 			
@@ -356,35 +401,6 @@ public class Controlador extends HttpServlet {
 	private void enviarInfoPanelAdmin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		/*String das = userLogin.getDas();
-		String nombre = userLogin.getNombre();
-		String apellido = userLogin.getApellido();
-		String email = userLogin.getEmail();
-
-		request.setAttribute("das", das);
-		request.setAttribute("nombre", nombre);
-		request.setAttribute("apellido", apellido);
-		request.setAttribute("email", email);
-
-		//RequestDispatcher requesDis = request.getRequestDispatcher("panel_administrador.jsp");
-		//RequestDispatcher requesDis = request.getRequestDispatcher("panel_admin_usuarios.jsp");
-		//requesDis.forward(request, response);
-		
-		try {
-			enviarInfoPanel(request, response);
-
-			List<Tareas> listaTareas = tareasDAO.seleccionaTodos();
-
-			System.out.println(listaTareas);
-
-			request.setAttribute("LISTARTAREAS", listaTareas);
-
-			RequestDispatcher miDispaTareas = request.getRequestDispatcher("/panel_admin_tareas.jsp");
-
-			miDispaTareas.forward(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
 		String das = userLogin.getDas();
 		String nombre = userLogin.getNombre();
 		String apellido = userLogin.getApellido();
@@ -403,7 +419,6 @@ public class Controlador extends HttpServlet {
 
 		RequestDispatcher requesDis = request.getRequestDispatcher("/panel_admin_tareas.jsp");
 		requesDis.forward(request, response);
-		
 		
 
 	}
