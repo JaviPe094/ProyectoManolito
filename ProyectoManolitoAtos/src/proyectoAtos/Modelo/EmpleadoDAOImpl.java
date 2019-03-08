@@ -131,4 +131,11 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 	
 	}
 	
+	@Override
+	public List<Empleados> filtrar(String filtro) {
+		
+		return null;
+		
+	}
+	
 }

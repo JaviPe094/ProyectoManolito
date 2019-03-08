@@ -254,6 +254,7 @@
       <th>EMAIL</th>
       <th>ESTADO</th>
       <th>PERMISOS</th>
+      <th>ACCION</th>
       
     </tr>
     <form action="Controlador" onsubmit="borrar()" method="post" name="linkTemp">

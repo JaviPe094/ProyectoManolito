@@ -69,34 +69,30 @@
 </head>
 <body>
 	<div>
-	<h2>Inserción tareas</h2>
+	<h2>Actualizar tarea</h2>
 	<form action="Controlador" method="post">
 		<table width="50%">
   <tbody>
     <tr>
       <td>NOMBRE</td>
-      <td><input type="text" name="nombre" id="nombre"></td>
+      <td><input type="text" name="nombre" id="nombre" value="${nombre}" required></td>
     </tr>
 	  
     <tr>
       <td>DESCRIPCION</td>
-      <td><input type="text" name="descripcion" id="descripcion"></td>
+      <td><input type="text" name="descripcion" id="descripcion" value="${nombre}" required></td>
     </tr>
 	  
     <tr>
       <td>ESTADO</td>
-      <td><label><input type="radio" name="estado" value="a" id="estado_1">Activo</label>
-        <br>
-        <label><input type="radio" name="estado" value="n" id="estado_2">Nuevo</label>
-        <br>
-        <label><input type="radio" name="estado" value="i" id="estado_2">Inactivo</label>
-        </td>
+      <td><input type="text" name="estado" id="estado" value="${estado}" required></td>
     </tr>
   </tbody>
 </table>
 		
-		<input id="botonEnviar" type="submit">
-		<input type="hidden" name="instruccion" value="actualizar_tareas">
+		<input id="botonEnviar" type="submit" value="Actualizar">
+<%-- 		<input type="hidden" name="das" id="das" value="${nombre}"> --%>
+		<input type="hidden" name="instruccion" value="funcion_actualizar_tareas">
 	</form>
 	</div>
 	

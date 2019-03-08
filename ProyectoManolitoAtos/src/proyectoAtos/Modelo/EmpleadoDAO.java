@@ -15,5 +15,7 @@ public interface EmpleadoDAO {
 	public void delete(String dasEmpleado);
 	
 	public List<Empleados> seleccionaTodos();
+	
+	public List<Empleados> filtrar(String filtro);
 
 }

@@ -110,6 +110,7 @@
 		}
 		
 		#fondoTabla{
+			overflow: scroll;
 			position: relative;
 			background-color: #FFFFFF;
 			margin: 40px;

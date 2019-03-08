@@ -121,7 +121,7 @@
 </table>
 	<input id="botonEnviar" type="submit" value="Actualizar">
 	<input type="hidden" name="das" id="das" value="${das}">
-	<input type="hidden" name="instruccion" value="funcion_actualizar">
+	<input type="hidden" name="instruccion" value="funcion_actualizar_emple">
 	</form>
 <!-- 	<form></form> -->
 	</div>

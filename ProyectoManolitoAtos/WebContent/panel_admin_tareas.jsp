@@ -243,6 +243,7 @@
       <th>NOMBRE</th>
       <th>DESCRIPCION</th>
       <th>ESTADO</th>
+      <th>ACCION</th>
     </tr>
     <form action="Controlador" method="post" name="linkTemp">
     <input type="hidden" name="instruccion" value="enviarInfo">
