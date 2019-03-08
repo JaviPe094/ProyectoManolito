@@ -249,13 +249,17 @@
       <th>DESCRIPCION</th>
       <th>ESTADO</th>
     </tr>
-    
+    <form action="Controlador" method="post" name="linkTemp">
+    <input type="hidden" name="instruccion" value="enviarInfo">
     <% for(Tareas tare : listaTareas){%>
 
 		 <tr>
 		 	<td><%=tare.getNombre()%></td>
 		 	<td><%=tare.getDescripcion()%></td>
 		 	<td><%=tare.getEstado().getEstado()%></td>
+		 	<td><button name="actualizar" value="<%=tare.getNombre()%>" type="submit">Actualizar</button>
+		 		<button name="borrar" value="<%=tare.getNombre()%>" type="submit">Borrar</button>
+		 	</td>
 		 	
 		 
     </tr>

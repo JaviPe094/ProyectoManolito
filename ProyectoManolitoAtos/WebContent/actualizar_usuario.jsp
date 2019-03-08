@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
 <!doctype html>
 <html>
 <head>
@@ -85,50 +82,41 @@
 </head>
 <body bgcolor="#ADD5FF">
 	<div>
-	<h2>Resgistro usuario</h2>
+	<h2>Actualizar usuario</h2>
 	<form action="Controlador" method="post">
 		<table width="100%">
   <tbody>
-  	<%
-	String msg = (String) request.getSession().getAttribute("msg");
-	if(msg != null && !msg.isEmpty()){%>
-		<span style="color:#B40404">${msg}</span>
-	<%}%>
-  
-    <tr>
-      <td>DAS</td>
-      <td><input type="text" name="das" id="das"></td>
+ 	<tr>
+      <td></td>
+      <td></td>
     </tr>
-<!--     <tr> -->
-<!--       <td>CONTRASEÑA PROVISIONAL</td> -->
-<%--       <td><input type="text" name="pass" id="pass" value="${pass}" readonly></td> --%>
-<!--     </tr> -->
     <tr>
       <td>NOMBRE</td>
-      <td><input type="text" name="nombre" id="nombre"></td>
+      <td><input type="text" name="nombre" id="nombre" value="${nombre}"></td>
     </tr>
     <tr>
       <td>APELLIDOS</td>
-      <td><input type="text" name="apellidos" id="apellidos"></td>
+      <td><input type="text" name="apellidos" id="apellidos" value="${apellido}"></td>
     </tr>
     <tr>
       <td>EMAIL</td>
-      <td><input type="email" name="email" id="email" ></td>
+      <td><input type="email" name="email" id="email" value="${email}"></td>
+    </tr>
+     <tr>
+      <td>ESTADO</td>
+      <td><input type="text" name="estado" id="estado" value="${estado}"></td>
     </tr>
     <tr>
       <td>PERMISOS</td>
-      <td>
-      	<label><input type="radio" name="permisos" value="admin" id="permisos_1">Admin</label>
-        <br>
-        <label><input type="radio" name="permisos" value="basico" id="permisos_2" checked>Basic</label>
-        <br>
-      </td>
+      <td><input type="text" name="permisos" id="permisos" value="${permisos}"></td>
     </tr>
   </tbody>
 </table>
-	<input id="botonEnviar" type="submit" value="Insertar">
-	<input type="hidden" name="instruccion" value="insertar_usuario">
+	<input id="botonEnviar" type="submit" value="Actualizar">
+	<input type="hidden" name="das" id="das" value="${das}">
+	<input type="hidden" name="instruccion" value="funcion_actualizar">
 	</form>
+<!-- 	<form></form> -->
 	</div>
 </body>
 </html>

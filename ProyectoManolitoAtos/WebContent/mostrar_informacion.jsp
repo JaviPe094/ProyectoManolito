@@ -85,7 +85,7 @@
 </head>
 <body bgcolor="#ADD5FF">
 	<div>
-	<h2>Resgistro usuario</h2>
+	<h2>Informacion usuario</h2>
 	<form action="Controlador" method="post">
 		<table width="100%">
   <tbody>
@@ -97,37 +97,33 @@
   
     <tr>
       <td>DAS</td>
-      <td><input type="text" name="das" id="das"></td>
+      <td><input type="text" name="das" id="das" value="${das}" readonly></td>
     </tr>
-<!--     <tr> -->
-<!--       <td>CONTRASEÑA PROVISIONAL</td> -->
-<%--       <td><input type="text" name="pass" id="pass" value="${pass}" readonly></td> --%>
-<!--     </tr> -->
+    <tr>
+      <td>CONTRASEÑA PROVISIONAL</td>
+      <td><input type="text" name="pass" id="pass" value="${pass}" readonly></td>
+    </tr>
     <tr>
       <td>NOMBRE</td>
-      <td><input type="text" name="nombre" id="nombre"></td>
+      <td><input type="text" name="nombre" id="nombre" value="${nombre }" readonly></td>
     </tr>
     <tr>
       <td>APELLIDOS</td>
-      <td><input type="text" name="apellidos" id="apellidos"></td>
+      <td><input type="text" name="apellidos" id="apellidos" value="${apellido }" readonly></td>
     </tr>
     <tr>
       <td>EMAIL</td>
-      <td><input type="email" name="email" id="email" ></td>
+      <td><input type="email" name="email" id="email" value="${email }" readonly></td>
     </tr>
     <tr>
-      <td>PERMISOS</td>
-      <td>
-      	<label><input type="radio" name="permisos" value="admin" id="permisos_1">Admin</label>
-        <br>
-        <label><input type="radio" name="permisos" value="basico" id="permisos_2" checked>Basic</label>
-        <br>
-      </td>
+       <td>PERMISOS</td>
+      <td><input type="text" name="permisos" id="permisos" value="${permisos }" readonly></td>
     </tr>
+ 
   </tbody>
 </table>
-	<input id="botonEnviar" type="submit" value="Insertar">
-	<input type="hidden" name="instruccion" value="insertar_usuario">
+		<input id="botonEnviar" type="submit" value="Aceptar">
+		<input type="hidden" name="instruccion" value="listarEmpleados">
 	</form>
 	</div>
 </body>
