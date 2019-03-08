@@ -117,7 +117,7 @@
 			background-color: #FFFFFF;
 			margin-top:20px;
 			margin-left:50px;
-			height: 350px;
+			height: 340px;
 			width: 90%;
 		}
 		
@@ -177,6 +177,13 @@
 			margin-left: 300px;
 			margin-top: -100px;		
 		}
+		
+		#dt{
+			
+			overflow: scroll;
+			heigth: 100%;
+		
+		}
 	
 	</style>
 </head>
@@ -217,6 +224,7 @@
 			<form action="Controlador" method="post">
 			<input type="submit" value="VISTA USUARIOS">
 			<input type="hidden" name="instruccion" value="listarEmpleados">
+			<input type="hidden" name="das" value="${das}">
 			</form>
 			<br><br>
 			<form action="Controlador" method="post">
@@ -233,6 +241,7 @@
 	<div id="marcoTareas">
 		<div id="fondoTabla">
 			
+			<div id=dt>
 			<table width="100%" border="2">
   <tbody>
    <tr>
@@ -240,23 +249,28 @@
       <th>DESCRIPCION</th>
       <th>ESTADO</th>
     </tr>
-    
+    <form action="Controlador" method="post" name="linkTemp">
+    <input type="hidden" name="instruccion" value="enviarInfo">
     <% for(Tareas tare : listaTareas){%>
 
 		 <tr>
 		 	<td><%=tare.getNombre()%></td>
 		 	<td><%=tare.getDescripcion()%></td>
 		 	<td><%=tare.getEstado().getEstado()%></td>
+		 	<td><button name="actualizar" value="<%=tare.getNombre()%>" type="submit">Actualizar</button>
+		 		<button name="borrar" value="<%=tare.getNombre()%>" type="submit">Borrar</button>
+		 	</td>
 		 	
 		 
     </tr>
     <%} %>
   </tbody>
 </table>
+</div>
 
 	</div>
 	</div>
-	<div id="botonesAccion"><input type="submit" value="Insertar Tarea" onclick="window.location.href='insercion_tareas.html'"></div>
+	<div id="botonesAccion"><input type="submit" value="Insertar Tarea" onclick="window.location.href='insercion_tareas.jsp'"></div>
 	</div>
 			
 </body>

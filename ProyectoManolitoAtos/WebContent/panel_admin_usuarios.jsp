@@ -7,6 +7,11 @@
 <!doctype html>
 <html>
 <head>
+<script>
+	function borrar(){
+		return window.confirm("Seguro que quieres borrar este usuario");
+	}
+</script>
 <meta charset="utf-8">
 <title>Panel Administracion Usuarios</title>
 	<style type="text/css">
@@ -251,7 +256,8 @@
       <th>PERMISOS</th>
       
     </tr>
-    
+    <form action="Controlador" onsubmit="borrar()" method="post" name="linkTemp">
+    <input type="hidden" name="instruccion" value="enviarInfoUsuarios">
     <% for(Empleados emp : listaEmpleados){%>
 
 		 <tr>
@@ -261,16 +267,23 @@
 		 	<td><%=emp.getEmail()%></td>
 		 	<td><%=emp.getEstado().getEstado()%></td>
 		 	<td><%=emp.getPermiso().getNombre()%></td>	 	
-		 
+		 	<td><button name="actualizar" value="<%=emp.getDas()%>" type="submit">Actualizar</button>
+		 		<button name="borrar" value="<%=emp.getDas()%>" type="submit">Borrar</button>
+		 	</td>
     </tr>
     <%} %>
+    </form>
   </tbody>
 </table>
 
 			
 	</div>
 	</div>
-	<div id="botonesAccion"><input type="button" value="Insertar Usuario" onclick="window.location.href='insercion_usuarios.jsp'">&nbsp;&nbsp;&nbsp;
+	<div id="botonesAccion">
+<!-- 	<form action="Controlador" method="post"> -->
+		<input type="button" value="Insertar Usuario" onclick="window.location.href='insercion_usuarios.jsp'">&nbsp;&nbsp;&nbsp;
+<!-- 	<button name="instruccion" value="link_insertar" type="submit">Insertar Usuario</button> -->
+<!-- 	</form> -->
 	</div>
 	</div>
 			

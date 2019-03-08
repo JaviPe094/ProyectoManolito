@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import proyectoAtos.Entidades.Empleados;
 import proyectoAtos.Entidades.Estado;
+import proyectoAtos.Entidades.Permisos;
 import proyectoAtos.Entidades.Tareas;
 import proyectoAtos.Modelo.EmpleadoDAO;
 import proyectoAtos.Modelo.EmpleadoDAOImpl;
 import proyectoAtos.Modelo.EstadoDAO;
 import proyectoAtos.Modelo.EstadoDAOImpl;
+import proyectoAtos.Modelo.PermisosDAO;
 import proyectoAtos.Modelo.PermisosDAOImpl;
 import proyectoAtos.Modelo.TareasDAO;
 import proyectoAtos.Modelo.TareasDAOImpl;
@@ -36,9 +38,11 @@ public class Controlador extends HttpServlet {
 	EmpleadoDAO dao;
 	TareasDAO tareasDAO;
 	Empleados userLogin;
-
+	Empleados emple;
 	EstadoDAO estadoDAO;
 	Estado estado;
+	PermisosDAO pdao;
+	Tareas tareas;
 
 	/* Contructor de Controlador */
 
@@ -53,6 +57,10 @@ public class Controlador extends HttpServlet {
 		estadoDAO = new EstadoDAOImpl();
 
 		tareasDAO = new TareasDAOImpl();
+		
+		pdao=new PermisosDAOImpl();
+		
+		tareas = new Tareas();
 
 	}
 
@@ -88,7 +96,7 @@ public class Controlador extends HttpServlet {
 
 			System.out.println("El comando esta vacio");
 
-			response.sendRedirect("formulario_login.html");
+			response.sendRedirect("formulario_login.jsp");
 
 			return;
 
@@ -143,7 +151,17 @@ public class Controlador extends HttpServlet {
 
 		case "listarTareas":
 			try {
-				enviarInfoPanel(request, response);
+				//enviarInfoPanel(request, response);
+				
+				String das = userLogin.getDas();
+				String nombre = userLogin.getNombre();
+				String apellido = userLogin.getApellido();
+				String email = userLogin.getEmail();
+
+				request.setAttribute("das", das);
+				request.setAttribute("nombre", nombre);
+				request.setAttribute("apellido", apellido);
+				request.setAttribute("email", email);
 
 				List<Tareas> listaTareas = tareasDAO.seleccionaTodos();
 
@@ -166,10 +184,11 @@ public class Controlador extends HttpServlet {
 			String apellido = request.getParameter("apellidos");
 			String email = request.getParameter("email");
 			String per = request.getParameter("permisos");
-			System.out.println(per);
+			//String pass = request.getParameter("password");
+;			System.out.println(per);
 		
 			Empleados test = new EmpleadoDAOImpl().read(das);
-		
+			
 			if (test == null) {
 			
 				Empleados newEmpleado = new Empleados(das, EmpleadoUtil.generatePass(8), nombre, apellido, 
@@ -177,7 +196,12 @@ public class Controlador extends HttpServlet {
 				
 				dao.create(newEmpleado);
 				
-				enviarInfoPanelAdmin(request, response);
+				//userLogin=dao.read(newEmpleado.getDas());
+				
+				mostrar_informacion(request,response,newEmpleado);
+				
+				
+			
 				
 			}
 			
@@ -188,7 +212,14 @@ public class Controlador extends HttpServlet {
 				
 			}
 			
+			
+			
+			
+			
+			
+			
 			break;
+			
 			
 		case "insertar_tarea":
 			
@@ -196,10 +227,82 @@ public class Controlador extends HttpServlet {
 			String nomb = request.getParameter("nombre");
 			String descripcion = request.getParameter("descripcion");
 			char estado = request.getParameter("estado").charAt(0);
+
+			Tareas testTarea = new TareasDAOImpl().read(nomb);
 			
-			Tareas newTareas = new Tareas(nomb, descripcion, new EstadoDAOImpl().read(estado));
+			if (testTarea == null) {
 			
-			tareasDAO.create(newTareas);
+				Tareas newTareas = new Tareas(nomb, descripcion, new EstadoDAOImpl().read(estado));
+				
+				tareasDAO.create(newTareas);
+				
+				// Refactorizar este código!
+				
+				try {
+					enviarInfoPanel(request, response);
+
+					List<Tareas> listaTareas = tareasDAO.seleccionaTodos();
+
+					System.out.println(listaTareas);
+
+					request.setAttribute("LISTARTAREAS", listaTareas);
+
+					RequestDispatcher miDispaTareas = request.getRequestDispatcher("/panel_admin_tareas.jsp");
+
+					miDispaTareas.forward(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				//response.sendRedirect("panel_admin_tareas.jsp");
+				
+			}
+			
+			else {
+				
+				request.getSession().setAttribute("msg", "Lo lamentamos, este nombre de tarea ya está en uso");
+				response.sendRedirect("insercion_tareas.jsp");
+				
+			}
+			
+			break;
+			
+		case "enviarInfoUsuarios":
+			
+			enviarInfoOperacionUsuarios(request,response);
+			
+			break;
+			
+		case "enviarInfoTareas":	
+					
+			enviarInfoActualizarTareas(request,response);
+			
+			break;
+	
+		case "funcion_actualizar":
+			
+			String das_A = request.getParameter("das");
+			String nombre_A = request.getParameter("nombre");
+			String apellido_A = request.getParameter("apellidos");
+			String email_A = request.getParameter("email");
+			char estado_A = request.getParameter("estado").charAt(0);
+			String per_A = request.getParameter("permisos");
+			
+			Permisos perm=pdao.read(per_A);
+			Estado est = estadoDAO.read(estado_A);
+			emple=dao.read(das_A);
+			
+			emple.setDas(das_A);
+			emple.setNombre(nombre_A);
+			emple.setApellido(apellido_A);
+			emple.setEmail(email_A);
+			emple.setPermiso(perm);
+			emple.setEstado(est);	
+			
+			
+			dao.update(emple);
+			
+			break;
 			
 		case "logout":
 			
@@ -212,6 +315,121 @@ public class Controlador extends HttpServlet {
 
 		}
 
+	}
+	
+	private void mostrar_informacion(HttpServletRequest request, HttpServletResponse response,Empleados emp) throws ServletException, IOException {
+
+		
+		
+		String das_1 = emp.getDas();
+		String pass = emp.getPassword();
+		String nombre_1 = emp.getNombre();
+		String apellido_1 = emp.getApellido();
+		String email_1 = emp.getEmail();
+		String permisos = emp.getPermiso().getNombre();
+
+		request.setAttribute("das", das_1);
+		request.setAttribute("pass", pass);			
+		request.setAttribute("nombre", nombre_1);
+		request.setAttribute("apellido", apellido_1);
+		request.setAttribute("email", email_1);
+		request.setAttribute("permisos", permisos);
+		
+
+		RequestDispatcher requesDis = request.getRequestDispatcher("/mostrar_informacion.jsp");
+		requesDis.forward(request, response);
+		
+	}
+
+	private void enviarInfoActualizarTareas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+		String nombre = tareas.getNombre();
+		String descripcion = tareas.getDescripcion();
+		char estado = tareas.getEstado().getEstado();
+		
+		nombre = request.getParameter("nombre");
+		descripcion = request.getParameter("descripcion");
+		estado = request.getParameter("estado").charAt(0);
+		
+		RequestDispatcher reDis = request.getRequestDispatcher("/actualizar_tareas.jsp");
+		
+		reDis.forward(request, response);
+		
+		
+	}
+	
+	private void enviarInfoOperacionUsuarios(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("HA LLEGADO AQUI");
+		String cod= request.getParameter("actualizar");
+		System.out.println("HA LLEGADO AQUI, el das es "+cod);
+		if(cod!=null)
+		{
+			userLogin = dao.read(cod);
+			String codigo = userLogin.getDas();
+			String nombre = userLogin.getNombre();
+			String apellido = userLogin.getApellido();
+			String email = userLogin.getEmail();
+			char estado = userLogin.getEstado().getEstado();
+			String permisos = userLogin.getPermiso().getNombre();
+			request.setAttribute("das", codigo);
+			request.setAttribute("nombre", nombre);
+			request.setAttribute("apellido", apellido);
+			request.setAttribute("email", email);
+			request.setAttribute("estado", estado);
+			request.setAttribute("permisos", permisos);
+			
+			RequestDispatcher requesDis = request.getRequestDispatcher("actualizar_usuario.jsp");
+			requesDis.forward(request, response);
+		}else {
+			
+			
+			Borrar(request,response);
+		}
+//		String cod  = request.getParameter("actualizar");
+		
+//		cod=request.getParameter("borrar");
+//		String aux= request.getParameter("borrar");
+//		System.out.println(aux);
+//		aux= request.getParameter("actualizar");
+//		System.out.println(aux);
+//		userLogin = dao.read(cod);
+//		
+//		String codigo = userLogin.getDas();
+//		String nombre = userLogin.getNombre();
+//		String apellido = userLogin.getApellido();
+//		String email = userLogin.getEmail();
+//		char estado = userLogin.getEstado().getEstado();
+//		String permisos = userLogin.getPermiso().getNombre();
+//		request.setAttribute("das", codigo);
+//		request.setAttribute("nombre", nombre);
+//		request.setAttribute("apellido", apellido);
+//		request.setAttribute("email", email);
+//		request.setAttribute("estado", estado);
+//		request.setAttribute("permisos", permisos);
+//		
+//		RequestDispatcher requesDis = request.getRequestDispatcher("actualizar_usuario.jsp");
+//		requesDis.forward(request, response);
+	}
+	
+	private void Borrar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+
+		String cod = request.getParameter("borrar");
+		
+		dao.delete(cod);
+		
+		List<Empleados> listaEmpleados = dao.seleccionaTodos();
+
+		request.setAttribute("LISTAREMPLEADOS", listaEmpleados);
+
+		RequestDispatcher miDispa = request.getRequestDispatcher("/panel_admin_usuarios.jsp");
+
+		miDispa.forward(request, response);
+		
+		//response.sendRedirect("panel_admin_usuarios.jsp");
+		
 	}
 
 	private void enviarInfoPanel(HttpServletRequest request, HttpServletResponse response)
@@ -226,6 +444,7 @@ public class Controlador extends HttpServlet {
 		request.setAttribute("nombre", nombre);
 		request.setAttribute("apellido", apellido);
 		request.setAttribute("email", email);
+		
 	}
 
 	private void enviarInfoPanelUser(HttpServletRequest request, HttpServletResponse response)
@@ -356,35 +575,6 @@ public class Controlador extends HttpServlet {
 	private void enviarInfoPanelAdmin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		/*String das = userLogin.getDas();
-		String nombre = userLogin.getNombre();
-		String apellido = userLogin.getApellido();
-		String email = userLogin.getEmail();
-
-		request.setAttribute("das", das);
-		request.setAttribute("nombre", nombre);
-		request.setAttribute("apellido", apellido);
-		request.setAttribute("email", email);
-
-		//RequestDispatcher requesDis = request.getRequestDispatcher("panel_administrador.jsp");
-		//RequestDispatcher requesDis = request.getRequestDispatcher("panel_admin_usuarios.jsp");
-		//requesDis.forward(request, response);
-		
-		try {
-			enviarInfoPanel(request, response);
-
-			List<Tareas> listaTareas = tareasDAO.seleccionaTodos();
-
-			System.out.println(listaTareas);
-
-			request.setAttribute("LISTARTAREAS", listaTareas);
-
-			RequestDispatcher miDispaTareas = request.getRequestDispatcher("/panel_admin_tareas.jsp");
-
-			miDispaTareas.forward(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
 		String das = userLogin.getDas();
 		String nombre = userLogin.getNombre();
 		String apellido = userLogin.getApellido();
@@ -403,7 +593,6 @@ public class Controlador extends HttpServlet {
 
 		RequestDispatcher requesDis = request.getRequestDispatcher("/panel_admin_tareas.jsp");
 		requesDis.forward(request, response);
-		
 		
 
 	}

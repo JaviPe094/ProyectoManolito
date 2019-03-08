@@ -99,6 +99,10 @@
       <td>DAS</td>
       <td><input type="text" name="das" id="das"></td>
     </tr>
+<!--     <tr> -->
+<!--       <td>CONTRASEÑA PROVISIONAL</td> -->
+<%--       <td><input type="text" name="pass" id="pass" value="${pass}" readonly></td> --%>
+<!--     </tr> -->
     <tr>
       <td>NOMBRE</td>
       <td><input type="text" name="nombre" id="nombre"></td>
@@ -116,7 +120,7 @@
       <td>
       	<label><input type="radio" name="permisos" value="admin" id="permisos_1">Admin</label>
         <br>
-        <label><input type="radio" name="permisos" value="basico" id="permisos_2">Basic</label>
+        <label><input type="radio" name="permisos" value="basico" id="permisos_2" checked>Basic</label>
         <br>
       </td>
     </tr>
