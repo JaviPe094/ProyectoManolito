@@ -1,8 +1,7 @@
 <!doctype html>
-<%@page import="java.util.List"%>
-<%@page import="proyectoAtos.Entidades.Tareas"%>
 <html>
 <head>
+<script src="js/Timeout.js"></script>
 <meta charset="utf-8">
 <title>Panel Usuario</title>
 	<style type="text/css">
@@ -110,7 +109,6 @@
 		}
 		
 		#fondoTabla{
-			overflow: scroll;
 			position: relative;
 			background-color: #FFFFFF;
 			margin: 40px;
@@ -151,22 +149,10 @@
 			width: 100%;
 		}
 		
-		#cerrarSesion{
-					
-			heigth: 30px; 					
-			width: 200px;	
-			margin-left: 300px;
-			margin-top: -100px;		
-		}
+		
 	
 	</style>
 </head>
-
-<%
-	//obtener los registros de Empleados
-	List<Tareas> listaTareas = (List<Tareas>) request.getAttribute("LISTARTAREAS");
-%>
-
 <body bgcolor="#ADD5FF">
 	
 	<div id="cabecera">
@@ -174,20 +160,13 @@
 	<div id="marcoInfo">
 		
 		<h3>DATOS USUARIO</h3>
-		<p>DAS:</p><input type="text" value="${das}" readonly>
-		<p>NOMBRE:</p><input type="text" value="${nombre}" readonly>
-		<p>APELLIDO:</p><input type="text" value="${apellido}" readonly>
-		<p>E-MAIL:</p><input type="text" value="${email}" readonly>
+		<p>DAS:</p><input type="text" value="${das}">
+		<p>NOMBRE:</p><input type="text" value="${nombre}">
+		<p>APELLIDO:</p><input type="text" value="${apellido}">
+		<p>E-MAIL:</p><input type="text" value="${email}">
 		
 		<div id="imagenUser">
 			<div id="img"><img width="160px" src="img/User_icon_2.svg.png"></div>
-		</div>
-		
-		<br>
-		<div id="cerrarSesion">
-		<form  action="Controlador" method="post">
-			<button  type="submit" value="logout" name="instruccion">Cerrar sesión</button>
-		</form>
 		</div>
 		
 	
@@ -213,21 +192,40 @@
 			<table width="100%" border="2">
   <tbody>
     <tr>
-      <th>NOMBRE</th>
-      <th>DESCRIPCION</th>
-      <th>ESTADO</th>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
     </tr>
-    
-    <% for(Tareas tare : listaTareas){%>
-
-		 <tr>
-		 	<td><%=tare.getNombre()%></td>
-		 	<td><%=tare.getDescripcion()%></td>
-		 	<td><%=tare.getEstado().getEstado()%></td>
-		 	
-		 
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
     </tr>
-    <%} %>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
   </tbody>
 </table>
 

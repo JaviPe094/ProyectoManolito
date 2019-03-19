@@ -82,7 +82,7 @@
 		<p>Usuario</p>
 		<input type="text" name="usuario" id="usuario"  required="required"> 
 		<br>
-		<p>Contraseña</p>
+		<p>ContraseÃ±a</p>
 		<input type="password" name="contra" id="contra"  required="required">
 		<br><br>
 		<input id="botonEnviar" type="submit" value="Aceptar">

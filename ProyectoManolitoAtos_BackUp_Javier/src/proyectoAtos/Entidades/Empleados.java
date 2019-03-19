@@ -16,14 +16,7 @@ import javax.persistence.Table;
 
 @NamedQueries({
 
-	@NamedQuery(name="Empleados.seleccionaTodos", query="SELECT e FROM Empleados e"),
-	@NamedQuery(name="Empleados.seleccionaGrupo", query="SELECT e FROM Empleados e WHERE grupo_id=:grupo"),
-	@NamedQuery(name="Empleados.filtrarDAS", query="SELECT e FROM Empleados e WHERE e.das= :name"),
-	@NamedQuery(name="Empleados.filtrarNombre", query="SELECT e FROM Empleados e WHERE e.nombre= :name"),
-	@NamedQuery(name="Empleados.filtrarApellido", query="SELECT e FROM Empleados e WHERE e.apellido= :name"),
-	//@NamedQuery(name="Empleados.filtrarEmail", query="SELECT e FROM Empleados e WHERE e.email= :name"),
-	@NamedQuery(name="Empleados.filtrarEstado", query="SELECT e FROM Empleados e WHERE e.estado= :name"),
-	@NamedQuery(name="Empleados.filtrarPermisos", query="SELECT e FROM Empleados e WHERE e.permiso= :name")
+	@NamedQuery(name="Empleados.seleccionaTodos", query="SELECT e FROM Empleados e")
 	
 })
 
@@ -59,10 +52,6 @@ public class Empleados implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "permiso")
 	private Permisos permiso;
-	
-	@ManyToOne
-	@JoinColumn(name = "grupo_id")
-	private GruposUsuario grupoId;
 	
 	public Empleados() {
 		
