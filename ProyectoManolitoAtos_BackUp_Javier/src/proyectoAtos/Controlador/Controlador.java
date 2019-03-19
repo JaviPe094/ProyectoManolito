@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import proyectoAtos.Entidades.Empleados;
 import proyectoAtos.Entidades.Estado;
+import proyectoAtos.Entidades.GruposUsuario;
 import proyectoAtos.Entidades.Permisos;
 import proyectoAtos.Entidades.Tareas;
 import proyectoAtos.Modelo.EmpleadoDAO;
@@ -192,7 +193,7 @@ public class Controlador extends HttpServlet {
 			if (test == null) {
 			
 				Empleados newEmpleado = new Empleados(das, EmpleadoUtil.generatePass(8), nombre, apellido, 
-						email, new EstadoDAOImpl().read('n'), new PermisosDAOImpl().read(per));
+						email, new EstadoDAOImpl().read('n'), new PermisosDAOImpl().read(per), new GruposUsuario());
 				
 				dao.create(newEmpleado);
 				
