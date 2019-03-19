@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>formulario_login</title>
+<title>Nueva Contraseña</title>
 	<style type="text/css">
-	html{
+		html{
 		
 		background-color: #648CE9;
 	}
@@ -16,7 +17,7 @@
 		margin:20px auto auto;
 		background-color: white;
 		width: 300px;	
-		height: 345px;
+		height: 260px;
 		padding: 10px;
 		
 	}
@@ -35,7 +36,7 @@
 			margin-top: -60px;
 			border-bottom: dotted #0055AF;
 		}
-		
+			
 		form{
 			
 			padding-top: 20px;
@@ -64,28 +65,25 @@
 			
 			font-size: 14px;
 			padding: 5px;
-			
-		}		
-	 
+		}
+	
 	</style>
 </head>
 <body bgcolor="#ADD5FF">
 	<div>
-	<h2>LOGIN</h2>
-	<form name="form1" method="post" action="Controlador">
-	<input type="hidden" name="instruccion" value="validar">
 	<%
 	String msg = (String) request.getSession().getAttribute("msg");
 	if(msg != null && !msg.isEmpty()){%>
 		<span style="color:#B40404">${msg}</span>
 	<%}%>
-		<p>Usuario</p>
-		<input type="text" name="usuario" id="usuario"  required="required"> 
-		<br>
-		<p>Contrase�a</p>
-		<input type="password" name="contra" id="contra"  required="required">
+	
+	<h2>Nueva contraseña</h2>
+	<form action="Controlador" method="post">
+	<input type="hidden" name="instruccion" value="usuarioAceptado">
+		<p>Introduce la nueva contraseña</p>
+		<input type="password" name="contrasena" id="contrasena">
 		<br><br>
-		<input id="botonEnviar" type="submit" value="Aceptar">
+		<input id="botonEnviar" type="submit">
 	</form>
 	</div>
 </body>

@@ -7,10 +7,12 @@
 <!doctype html>
 <html>
 <head>
-
-<script src="js/Timeout.js"></script>
-
-
+<script src="js/Timeout"></script>
+<script>
+	function borrar(){
+		return window.confirm("Seguro que quieres borrar este usuario");
+	}
+</script>
 <meta charset="utf-8">
 <title>Panel Administracion Usuarios</title>
 	<style type="text/css">
@@ -25,7 +27,7 @@
 		margin:20px auto auto;
 		background-color: white;
 		width: 950px;	
-		height: 750px;
+		height: 780px;
 		padding: 10px;
 		
 	}
@@ -116,11 +118,12 @@
 			position: relative;
 			background-color: #167CDC;
 			width: 100%;
-			height: 390px;
+			height: 420px;
 			margin-top: 10px;
 		}
 		
 		#fondoTabla{
+			overflow: scroll;
 			position: absolute;
 			background-color: #FFFFFF;
 			margin-top:20px;
@@ -166,7 +169,7 @@
 		#botonesAccion{
 			
 			position: absolute;
-			margin-top: 740px;
+			margin-top: -30px;
 			margin-left: 50px;
 		}
 		
@@ -177,7 +180,14 @@
 			
 		}
 		
+		#cerrarSesion{
 		
+			heigth: 30px; 					
+			width: 200px;	
+			margin-left: 300px;
+			margin-top: -100px;	
+		}
+				
 	
 	</style>
 </head>
@@ -188,26 +198,28 @@
 %>
 
 
-
-<body onmousemove="reiniciarTimeout(60)" onkeypress="reiniciarTimeout(60)" onload="iniciarTimeout(60)" bgcolor="#ADD5FF">
-
-<body bgcolor="#ADD5FF">
-
+<body onkeypress="reiniciarTimeout(60)" onmousemove="reiniciarTimeout(60)" onload="iniciarTimeout(60)" bgcolor="#ADD5FF">
 	
 	<div id="cabecera">
 	
 	<div id="marcoInfo">
 		
 		<h3>DATOS ADMINISTRADOR</h3>
-		<p>DAS:</p><input type="text" value="${das}">
-		<p>NOMBRE:</p><input type="text" value="${nombre}">
-		<p>APELLIDO:</p><input type="text" value="${apellido}">
-		<p>E-MAIL:</p><input type="text" value="${email}">
+		<p>DAS:</p><input type="text" value="${das}" readonly>
+		<p>NOMBRE:</p><input type="text" value="${nombre}" readonly>
+		<p>APELLIDO:</p><input type="text" value="${apellido}" readonly>
+		<p>E-MAIL:</p><input type="text" value="${email}" readonly>
 		
 		<div id="imagenUser">
 			<div id="img"><img width="160px" src="img/User_icon_2.svg.png"></div>
 		</div>
 		
+		<br>
+		<div id="cerrarSesion">
+		<form  action="Controlador" method="post">
+			<button  type="submit" value="logout" name="instruccion">Cerrar sesión</button>
+		</form>
+		</div>
 	
 	</div>
 	<div id="marcoOperaciones">
@@ -233,42 +245,48 @@
 	<div id="parteAbajo">
 	<div id="marcoTareas">
 		<div id="fondoTabla">
-			
+		
 			<table id="tabla" width="100%" border="2">
   <tbody>
    <tr>
       <th>DAS</th>
-      <th>PASSWORD</th>
       <th>NOMBRE</th>
       <th>APELLIDO</th>
       <th>EMAIL</th>
       <th>ESTADO</th>
       <th>PERMISOS</th>
+      <th>ACCION</th>
       
     </tr>
-    
+    <form action="Controlador" onsubmit="borrar()" method="post" name="linkTemp">
+    <input type="hidden" name="instruccion" value="enviarInfoUsuarios">
     <% for(Empleados emp : listaEmpleados){%>
 
 		 <tr>
 		 	<td><%=emp.getDas()%></td>
-		 	<td><%=emp.getPassword()%></td>
 		 	<td><%=emp.getNombre()%></td>
 		 	<td><%=emp.getApellido()%></td>
 		 	<td><%=emp.getEmail()%></td>
 		 	<td><%=emp.getEstado().getEstado()%></td>
-		 	<td><%=emp.getPermiso().getNombre()%></td>
-		 	
-		 
+		 	<td><%=emp.getPermiso().getNombre()%></td>	 	
+		 	<td><button name="actualizar" value="<%=emp.getDas()%>" type="submit">Actualizar</button>
+		 		<button name="borrar" value="<%=emp.getDas()%>" type="submit">Borrar</button>
+		 	</td>
     </tr>
     <%} %>
+    </form>
   </tbody>
 </table>
 
 			
 	</div>
 	</div>
-	<div id="botonesAccion"><input type="submit" value="Insertar Tarea">&nbsp;&nbsp;&nbsp;
-		<input type="submit" value="Borrar Tarea"></div>
+	<div id="botonesAccion">
+<!-- 	<form action="Controlador" method="post"> -->
+		<input type="button" value="Insertar Usuario" onclick="window.location.href='insercion_usuarios.jsp'">&nbsp;&nbsp;&nbsp;
+<!-- 	<button name="instruccion" value="link_insertar" type="submit">Insertar Usuario</button> -->
+<!-- 	</form> -->
+	</div>
 	</div>
 			
 </body>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NamedQuery;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -11,7 +12,10 @@ import proyectoAtos.Entidades.Empleados;
 
 public class EmpleadoDAOImpl implements EmpleadoDAO {
 
-private EntityManagerFactory emf = null;
+	private EntityManagerFactory emf = null;
+
+	private int puntero;
+	private int maxPaginas;
 	
 	public EmpleadoDAOImpl() {
 		
@@ -126,6 +130,128 @@ private EntityManagerFactory emf = null;
 			}
 		}
 	
+	}
+	
+	/*
+	@NamedQuery(name="Empleados.filtrarNombre", query="SELECT e FROM Empleados e WHERE e.nombre= :name"),
+	@NamedQuery(name="Empleados.filtrarApellido", query="SELECT e FROM Empleados e WHERE e.apellido= :name"),
+	//@NamedQuery(name="Empleados.filtrarEmail", query="SELECT e FROM Empleados e WHERE e.email= :name"),
+	@NamedQuery(name="Empleados.filtrarEstado", query="SELECT e FROM Empleados e WHERE e.estado= :name"),
+	@NamedQuery(name="Empleados.filtrarPermisos", query="SELECT e FROM Empleados e WHERE e.permiso= :name")
+	*/
+	
+	@Override
+	public List<Empleados> readByGroup(String nombre){
+		EntityManager em = null;
+		Query query = null;
+		
+		try{
+			em = emf.createEntityManager();
+			
+			query = em.createNamedQuery("Empleados.seleccionaGrupo");
+			query.setParameter("grupo",nombre);
+			
+			return query.getResultList();
+		} finally{
+			if(em!=null)
+				em.close();
+		}
+	}
+	
+	@Override
+	public List<Empleados> filtrarNombre(String valor) {
+		
+		EntityManager em = emf.createEntityManager();
+		Query query = null;
+		
+		try {
+			
+			query = em.createNamedQuery("Empleados.filtrarNombre");
+			query.setParameter("name", valor);
+			
+			return query.getResultList();
+			
+		} finally {
+			
+			if (em != null) {
+				
+				em.close();
+			}
+			
+		}
+		
+	}
+	
+	@Override
+	public List<Empleados> filtrarApellido(String valor) {
+		
+		EntityManager em = emf.createEntityManager();
+		Query query = null;
+		
+		try {
+			
+			query = em.createNamedQuery("Empleados.filtrarApellido");
+			query.setParameter("name", valor);
+			
+			return query.getResultList();
+			
+		} finally {
+			
+			if (em != null) {
+				
+				em.close();
+			}
+			
+		}
+		
+	}
+	
+	@Override
+	public List<Empleados> filtrarEstado(String valor) {
+		
+		EntityManager em = emf.createEntityManager();
+		Query query = null;
+		
+		try {
+			
+			query = em.createNamedQuery("Empleados.filtrarEstado");
+			query.setParameter("name", new EstadoDAOImpl().read((char) valor.charAt(0)));
+			
+			return query.getResultList();
+			
+		} finally {
+			
+			if (em != null) {
+				
+				em.close();
+			}
+			
+		}
+		
+	}
+	
+	@Override
+	public List<Empleados> filtrarPermisos(String valor) {
+		
+		EntityManager em = emf.createEntityManager();
+		Query query = null;
+		
+		try {
+			
+			query = em.createNamedQuery("Empleados.filtrarPermisos");
+			query.setParameter("name", new PermisosDAOImpl().read(valor));
+			
+			return query.getResultList();
+			
+		} finally {
+			
+			if (em != null) {
+				
+				em.close();
+			}
+			
+		}
+		
 	}
 	
 }
