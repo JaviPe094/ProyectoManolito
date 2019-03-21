@@ -10,6 +10,11 @@ import javax.persistence.Column;
 @Entity
 @Table(name="Empleados_tareas_view")
 public class Empleados_tareas_view implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/*@Column(name="DAS")
 	private String das;
 	
@@ -24,7 +29,6 @@ public class Empleados_tareas_view implements Serializable{
 	private String emp;
 	
 	@Column(name="permiso")
-	//¿es necesario que sea un objeto de Permisos?
 	private Permisos perm;
 	
 	@Column(name="empleado_estado")
@@ -39,8 +43,7 @@ public class Empleados_tareas_view implements Serializable{
 	
 	public Empleados_tareas_view(String das,String tarea,String emp,
 		Permisos perm,Estado emp_estado,Estado tar_estado){
-		 this.das=das;
-		 this.tarea=tarea;
+		 this.id=new EmpTareasId(das,tarea);
 		 this.emp=emp;
 		 this.perm=perm;
 		 this.emp_estado=emp_estado;
@@ -48,12 +51,11 @@ public class Empleados_tareas_view implements Serializable{
 	}
 	
 	
-	public String getDas(){ 
-		return this.das;
+
+	public EmpTareasId getId() {
+		return id;
 	}
-	public String getTarea(){
-		return this.tarea;
-	}
+
 	public String getEmp(){
 		return this.emp;
 	}
@@ -66,12 +68,11 @@ public class Empleados_tareas_view implements Serializable{
 	public Estado getTar_estado(){
 		return this.tar_estado;
 	}
-	public void setDas(String das){
-		this.das=das;
+	
+	public void setId(EmpTareasId id) {
+		this.id = id;
 	}
-	public void setTarea(String tarea){
-		this.tarea=tarea;
-	}
+	
 	public void setEmp(String emp){
 		this.emp=emp;
 	}
@@ -79,9 +80,9 @@ public class Empleados_tareas_view implements Serializable{
 		this.perm=perm;
 	}
 	public void setEmp_estado(Estado emp_estado){
-		this.emp_estado;
+		this.emp_estado=emp_estado;
 	}
-	public void setTar_estado(Tar_estado tar_estado){
-		this.tar_estado;
+	public void setTar_estado(Estado tar_estado){
+		this.tar_estado=tar_estado;
 	}
 }

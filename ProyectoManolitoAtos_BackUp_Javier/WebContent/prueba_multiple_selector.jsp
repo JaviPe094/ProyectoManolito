@@ -1,15 +1,7 @@
-<%@page import="proyectoAtos.Entidades.Empleados" %>
-<%@page import="proyectoAtos.Entidades.GruposUsuario" %>
-<%@page import="proyectoAtos.Entidades.Estado" %>
-<%@page import="proyectoAtos.Entidades.Permisos" %>
-<%@page import="java.util.List"%>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Asignación de Tareas</title>
-	<script type="text/javascript" src="js/Timeout.js"></script>
-	<script type="text/javascript">
+<script type="text/javascript">
 	function FormCommand_Change(command){
 		var form_submit=document.getElementById("botonEnviar");
 		var form_command=document.getElementById("Command");
@@ -32,6 +24,7 @@
 			document.getElementById("grupos").style.display="none";
 			document.getElementById("grupos").disabled=true;
 			FormCommand_Change("asignar_tarea_usuario");
+			myFunction();
 		}else if(cadena.localeCompare("grupo")==0){
 			document.getElementById("default").style.display="none";
 			//document.getElementById("default").disabled=true;
@@ -40,6 +33,7 @@
 			document.getElementById("grupos").style.display="block";
 			document.getElementById("grupos").disabled=false;
 			FormCommand_Change("asignar_tarea_grupo");
+			myFunction();
 		}else{
 			document.getElementById("default").style.display="block";
 			//document.getElementById("default").disabled=true;
@@ -48,11 +42,18 @@
 			document.getElementById("grupos").style.display="none";
 			document.getElementById("grupos").disabled=true;
 			FormCommand_Change("invalid");
+			myFunction();
 		}
 	}
+	
+	function myFunction() {
+		  var x = document.getElementById("Command").value;
+		  document.getElementById("demo").innerHTML = "Command: " + x;
+		}
 	</script>
-	<style type="text/css">
-		html{
+<script type="text/javascript" src="js/Timeout.js"></script>
+<style>
+html{
 		
 		background-color: #648CE9;
 	}
@@ -112,83 +113,54 @@
 			padding: 5px;
 		}
 	
-	</style>
-<%
-	//Obtenemos los usuarios y los grupos que se mostrarán en los selectores
-	//del formulario de más abajo en la vista
-	String cadena="prueba_";
-	//List<Empleados> listaEmpleados = (List<Empleados>) request.getAttribute("LISTAREMPLEADOS");
-	//Datos de prueba(para testeo pre-bbdd)
-	Empleados em = new Empleados();
-	List<Empleados> listaEmpleados=null;
-	for(int i=0;i<10;i++){
-		em.setDas(cadena+i);
-		em.setPassword(cadena+i);
-		em.setNombre(cadena+i);
-		em.setApellido(cadena+i);
-		em.setEmail(cadena+i);
-		em.setEstado(new Estado('n',"nuevo usuario"));
-		em.setPermiso(new Permisos());
-		em.setGrupoId(new GruposUsuario());
-		listaEmpleados.add(em);
-		System.out.println("Insertado Empleado: "+em);
-	}
-	//Datos de prueba(para testeo pre-bbdd)
-	//List<GruposUsuario> listaGrupos = (List<GruposUsuario>) request.getAttribute("LISTARGRUPOS");
-%>
+</style>
 </head>
 <body onkeypress="reiniciarTimeout(60)" onmousemove="reiniciarTimeout(60)" onload="iniciarTimeout(60)">
-	<div>
+<div>
 	<h2>Asignar tarea</h2>
-	<form action="Controlador" method="post">
+	<form action="#">
 		<table width="50%">
   <tbody>
     <tr>
       <td>Tarea</td>
-      <td><input type="text" name="nombre" id="nombre" value="${nombre}" readonly></td>
+      <td><input type="text" name="nombre" id="nombre" value="Tarea a asignar" readonly></td>
     </tr>
 	  
     <tr>
-      <td>Usuario o Grupo</td>
+      <td>Usuarios/Grupos</td>
       <td>
 	   <select id="seleccion" onchange="ToggleUserGroup()"><!--esto debería funcionar de alguna manera-->
-		<option value="usuario">Usuarios</option>
-		<option value="grupo">Grupos</option>
+		 <option value="null" selected>Elige una opci�n</option>
+		 <option value="usuario">Usuarios</option>
+		 <option value="grupo">Grupos</option>
 	   </select>
 	  </td>
     </tr>
 	  
     <tr>
-	 <td>
-	 <select id="default" name="default" style="display:block" disabled>
+     <td>Selecci�n</td>
+	 <td>	 
+ 		<select id="default" name="default" style="display:block" disabled>
  			<option selected value="default">invalid</option>
  		</select>
-	   <select id="usuarios" name="usuario" style="display:none">
-	   <option value="none" selected></option>
-		<% for(Empleados emp : listaEmpleados){ %>
-			<option value="<%=emp.getDas()%>"><%=emp.getDas()%></option>
-		<%}%>
-	   </select>
-	   <select id="grupos" name="grupo" style="display:none">
-		<% for(Empleados emp2 : listaEmpleados){  /*for(GruposUsuario gu : listaGrupos){*/%>
-			<option value="<%=emp2.getNombre()%>"><%=emp2.getNombre()%>----2</option>
-		<%}%>
-	   </select>
-	  </td>
-	 <!--<select id="seleccion" onchange="ToggleOptions('seleccion')">
-      <td>ESTADO</td>
-      <td><input type="text" name="estado" id="estado" value="${estado}" required></td>
-	 </select> -->
-    </tr>
-  </tbody>
-</table>
-		
-		<input id="botonEnviar" type="submit" value="Actualizar" disabled="true">
-<!-- 		<input type="hidden" name="das" id="das" value="${nombre}"> -->
-		<input type="hidden" id="Command" name="instruccion" value="funcion_asignar_tareas">
-		<input type="hidden" name="tarea_aux" value="${nombre}">
-	</form>
-	</div>
-	
+ 		<select id="usuarios" name="usuario" style="display:none" disabled>
+	   		<option value="user1" selected>user1</option>
+      		 <option value="user2">user2</option>
+       	</select>
+  		<select id="grupos" name="grupo" style="display:none" disabled>
+	   		<option value="group1" selected>group1</option>
+       		<option value="group2">group2</option>
+       	</select>
+       </td>
+       </tr>
+       </tbody>
+       </table>
+
+<input id="botonEnviar" type="submit" value="invalid" disabled>
+<input type="hidden" id="Command" name="instruccion" value="funcion_asignar_tareas">
+<input type="hidden" name="tarea_aux" value="blabla">
+</form>
+
+
 </body>
 </html>

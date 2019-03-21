@@ -1,27 +1,32 @@
-package proyecoAtos.Entidades;
+package proyectoAtos.Entidades;
 
 import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name="EMPLEADOS_TAREAS")
 
-@NamedQueries({
+/**Importante, las NamedQueries NO pueden ser INSERT,de manera que habrá que utilizar una 
+ * query nativa para poder hacer esta operación
+ * @NamedQueries({
 	
 	@NamedQuery(name="EmpTareas.registraGrupo", query="INSERT INTO EMPLEADOS_TAREAS(et.empleado_id,et.tarea_id) et SELECT e.das,:tarea FROM Empleados e WHERE e.grupo_id=:grupo")
 	
-})
+})*/
 public class EmpTareas implements Serializable{
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@EmbeddedId EmpTareasId id;
+	@EmbeddedId 
+	private EmpTareasId id;
 	
 	public EmpTareas(){
 		
@@ -31,7 +36,7 @@ public class EmpTareas implements Serializable{
 		this.id=id;
 	}
 	
-	public EmpTareasId getId(){
+	public EmpTareasId getId() {
 		return this.id;
 	}
 	
@@ -49,5 +54,5 @@ public class EmpTareas implements Serializable{
 	
 	@Id
 	@Column(name="tarea_id")
-	private String tareaId;/
+	private String tareaId;*/
 }

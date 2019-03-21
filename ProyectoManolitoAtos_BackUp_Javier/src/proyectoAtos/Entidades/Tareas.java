@@ -17,18 +17,6 @@ import javax.persistence.Table;
 @NamedQueries({
 	
 	@NamedQuery(name="Tareas.seleccionaTodos", query="SELECT t FROM Tareas t")
-	@NamedQuery(name="EmpTareas.readAll", query = "SELECT t.*,et.empleado_id FROM Tareas t LEFT JOIN Empleados_Tareas et ON t.nombre=et.tarea_id LEFT JOIN Empleados e ON et.empleado_id=e.das");
-	//Hay que comprobar si funciona esta query... probablemente no dado 
-	//que no devolvería una Entidad.podemos hacer una vista para solucionar esto
-	//o llenar de campos la tabla intermedia de Empleados Tareas...
-	/**
-	*También podríamos hacerlo de otra manera,con varias sentencias select
-	*hasta conseguir los datos necesarios,pero realmente creo que sería 
-	*más sencillo o utilizar una vista o que la tabla Empleados_Tareas 
-	*tuviera más campos de las tablas de las que depende su PK(¿Padres?)
-	*
-	*/
-	//(SELECT et.empleado_id FROM Empleados_Tareas et WHERE tarea_id=:tarea)
 })
 
 

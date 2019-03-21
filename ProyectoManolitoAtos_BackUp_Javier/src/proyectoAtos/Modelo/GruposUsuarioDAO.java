@@ -6,7 +6,7 @@ public interface GruposUsuarioDAO{
 	
 	public void create(GruposUsuario gu);
 	
-	public GruposUsuario(String nombre);
+	public GruposUsuario read(String nombre);
 	
 	public void update(GruposUsuario gu);
 	

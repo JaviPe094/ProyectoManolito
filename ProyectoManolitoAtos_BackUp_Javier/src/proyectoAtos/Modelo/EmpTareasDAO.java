@@ -3,6 +3,7 @@ package proyectoAtos.Modelo;
 import java.util.List;
 
 import proyectoAtos.Entidades.EmpTareas;
+import proyectoAtos.Entidades.EmpTareasId;
 
 public interface EmpTareasDAO{
 	

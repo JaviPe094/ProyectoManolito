@@ -1,6 +1,19 @@
 <!doctype html>
 <%@page import="java.util.List"%>
 <%@page import="proyectoAtos.Entidades.Tareas"%>
+<!--
+	Cambios requeridos para esta vista por la tarea 4:
+	  mostrar solo las tareas que le correspondan al empleado concreto que se conecte a la 
+	  aplicación,las cuales incluyen las que NO estén asignadas a ningún empleado en específico.
+	Posibles soluciones:
+	 .-hacer una query nativa con un outer join en una subconsulta,de manera que nos de una lista
+	    de tareas con das igual al del usuario Y además,aquellas tareas sin representación en la 
+	    tabla EmpTareas.Ésto se podría conseguir utilizando la vista Empleados_tareas_view,que ya
+	    fue creada utilizando FULL OUTER JOIN,de manera que contiene tanto las tareas con empleado
+	    asignado,de los cuales guarda los datos que podría ser interesante tener,como nombre o email
+	    (entre otros), como las tareas que no están asignadas a ninguna tarea, teniendo un valor de
+	    null en el resto de columnas.
+ -->
 <html>
 <head>
 <meta charset="utf-8">

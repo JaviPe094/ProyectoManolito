@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @NamedQueries({
 
 	@NamedQuery(name="Empleados.seleccionaTodos", query="SELECT e FROM Empleados e"),
-	@NamedQuery(name="Empleados.seleccionaGrupo", query="SELECT e FROM Empleados e WHERE grupo_id=:grupo"),
+	//@NamedQuery(name="Empleados.seleccionaGrupo", query="SELECT e FROM Empleados e WHERE grupo_id=:grupo"),
 	@NamedQuery(name="Empleados.filtrarDAS", query="SELECT e FROM Empleados e WHERE e.das= :name"),
 	@NamedQuery(name="Empleados.filtrarNombre", query="SELECT e FROM Empleados e WHERE e.nombre= :name"),
 	@NamedQuery(name="Empleados.filtrarApellido", query="SELECT e FROM Empleados e WHERE e.apellido= :name"),
@@ -69,7 +69,8 @@ public class Empleados implements Serializable {
 	}
 
 	public Empleados(String das, String password, String nombre, String apellido, String email, Estado estado,
-			Permisos permiso) {
+			Permisos permiso, GruposUsuario grupoId) {
+		super();
 		this.das = das;
 		this.password = password;
 		this.nombre = nombre;
@@ -77,9 +78,8 @@ public class Empleados implements Serializable {
 		this.email = email;
 		this.estado = estado;
 		this.permiso = permiso;
+		this.grupoId = grupoId;
 	}
-
-
 
 	public String getDas() {
 		return das;
@@ -136,8 +136,17 @@ public class Empleados implements Serializable {
 	public void setPermiso(Permisos permiso) {
 		this.permiso = permiso;
 	}
+	
+	public GruposUsuario getGrupoId() {
+		return grupoId;
+	}
+
+	public void setGrupoId(GruposUsuario grupoId) {
+		this.grupoId = grupoId;
+	}
 
 	// Debug
+	
 	
 	@Override
 	public String toString() {

@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.NamedQuery;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -14,8 +13,8 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 
 	private EntityManagerFactory emf = null;
 
-	private int puntero;
-	private int maxPaginas;
+	//private int puntero;
+	//private int maxPaginas;
 	
 	public EmpleadoDAOImpl() {
 		

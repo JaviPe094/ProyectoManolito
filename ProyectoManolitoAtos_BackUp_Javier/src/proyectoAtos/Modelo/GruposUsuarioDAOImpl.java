@@ -1,17 +1,17 @@
 package proyectoAtos.Modelo;
 
 import proyectoAtos.Entidades.GruposUsuario;
-import java.util.List;
+//import java.util.List;//si hacemos un readAll se utilizará
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-//import javax.persistence.NamedQuery;
+//import javax.persistence.NamedQuery;//si hacemos un readAll se utilizará
 import javax.persistence.Persistence;
-import javax.persistence.Query;
+//import javax.persistence.Query;//si hacemos un readAll se utilizará
 
 public class GruposUsuarioDAOImpl implements GruposUsuarioDAO{
 	
-	privateEntityManagerFactory emf = null;
+	private EntityManagerFactory emf = null;
 	
 	public GruposUsuarioDAOImpl(){
 		emf = Persistence.createEntityManagerFactory("PU-ML");
@@ -28,7 +28,7 @@ public class GruposUsuarioDAOImpl implements GruposUsuarioDAO{
 			
 			em.persist(gu);
 			
-			em.getTransaction.commit();
+			em.getTransaction().commit();
 		}finally{
 			if(em!=null)
 				em.close();
@@ -76,11 +76,14 @@ public class GruposUsuarioDAOImpl implements GruposUsuarioDAO{
 			
 			em.getTransaction().begin();
 			
-			GruposUsuario gu = gu.getReference(GruposUsuario.class, nombre);
+			GruposUsuario gu = em.getReference(GruposUsuario.class, nombre);
 			
 			em.remove(gu);
 			
 			em.getTransaction().commit();
+		}finally {
+			if(em!=null)
+				em.close();
 		}
 	}
 }

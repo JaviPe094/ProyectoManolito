@@ -8,7 +8,7 @@ import proyectoAtos.Entidades.EmpTareasId;
 
 public interface Empleados_tareas_viewsDAO{
 	
-	public Empleados_tareas_views read(EmpTareasId id);
+	public Empleados_tareas_view read(EmpTareasId id);
 	//public readByUser();
 	//public readByGroup();
 }

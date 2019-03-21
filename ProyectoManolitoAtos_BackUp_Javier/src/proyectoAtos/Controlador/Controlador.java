@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import proyectoAtos.Entidades.EmpTareas;
+import proyectoAtos.Entidades.EmpTareasId;
 import proyectoAtos.Entidades.Empleados;
 import proyectoAtos.Entidades.Estado;
+import proyectoAtos.Entidades.GruposUsuario;
 import proyectoAtos.Entidades.Permisos;
 import proyectoAtos.Entidades.Tareas;
+import proyectoAtos.Modelo.EmpTareasDAOImpl;
 import proyectoAtos.Modelo.EmpleadoDAO;
 import proyectoAtos.Modelo.EmpleadoDAOImpl;
 import proyectoAtos.Modelo.EstadoDAO;
@@ -185,14 +189,14 @@ public class Controlador extends HttpServlet {
 			String email = request.getParameter("email");
 			String per = request.getParameter("permisos");
 			//String pass = request.getParameter("password");
-;			System.out.println(per);
+			//System.out.println(per);
 		
 			Empleados test = new EmpleadoDAOImpl().read(das);
 			
 			if (test == null) {
 			
 				Empleados newEmpleado = new Empleados(das, EmpleadoUtil.generatePass(8), nombre, apellido, 
-						email, new EstadoDAOImpl().read('n'), new PermisosDAOImpl().read(per));
+						email, new EstadoDAOImpl().read('n'), new PermisosDAOImpl().read(per), new GruposUsuario());
 				
 				dao.create(newEmpleado);
 				
@@ -342,6 +346,24 @@ public class Controlador extends HttpServlet {
 			RequestDispatcher miDispaTareas = request.getRequestDispatcher("/panel_admin_tareas.jsp");
 
 			miDispaTareas.forward(request, response);
+			
+			break;
+			
+		case "asignar_tarea_usuario" : 
+			
+			String aux_tar=request.getParameter("tarea_aux");
+			String aux_user=request.getParameter("usuario");
+			
+			new EmpTareasDAOImpl().create(new EmpTareas(new EmpTareasId(aux_tar,aux_user)));
+			
+			break;
+			
+		case "asignar_tarea_grupo" : 
+			
+			String aux_tar2=request.getParameter("tarea_aux");
+			String aux_group=request.getParameter("grupo");
+			
+			new EmpTareasDAOImpl().createByGroup(aux_tar2, aux_group);;
 			
 			break;
 			
@@ -674,8 +696,6 @@ public class Controlador extends HttpServlet {
 
 				enviarInfoPanelUser(request, response);
 			}
-		}
-		
+		}	
 	}
-
 }

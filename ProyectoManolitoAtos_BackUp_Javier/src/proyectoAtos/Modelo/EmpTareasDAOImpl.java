@@ -1,11 +1,13 @@
-package proyectoAtos.Modelo
+package proyectoAtos.Modelo;
 
 import proyectoAtos.Entidades.EmpTareas;
+import proyectoAtos.Entidades.EmpTareasId;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.NamedQuery;
+//import javax.persistence.NamedQuery;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -16,7 +18,7 @@ public class EmpTareasDAOImpl implements EmpTareasDAO{
 	/*private int puntero;
 	private int maxPaginas;*/
 	
-	public EmpleadoDAOImpl(){
+	public EmpTareasDAOImpl(){
 		emf = Persistence.createEntityManagerFactory("PU-ML");
 	}
 	
@@ -54,18 +56,18 @@ public class EmpTareasDAOImpl implements EmpTareasDAO{
 			*usar el dialecto propio de la bd,ya sea oracle,mysql,etc...
 			*para formar cualquier consulta que queramos realizar,como
 			*en este caso,que lo usaríamos para hacer un INSERT INTO SELECT
-			*em.createNativeQuery("INSERT INTO EMPLEADOS_TAREAS(et.empleado_id,et.tarea_id) et SELECT e.das,? FROM Empleados e WHERE e.grupo_id=?")
-			*.setParameter(1,new TareasDAOImpl().read(tarea_id))
-			*.setParameter(2,group_id)
-			*.executeUpdate();
-			*/
+			*/em.createNativeQuery("INSERT INTO EMPLEADOS_TAREAS(et.empleado_id,et.tarea_id) et SELECT e.das,? FROM Empleados e WHERE e.grupo_id=?")
+			.setParameter(1,new TareasDAOImpl().read(tarea_id))
+			.setParameter(2,group_id)
+			.executeUpdate();
 			
-			Query query = em.createNamedQuery("EmpTareas.registraGrupo");
+			
+			/*Query query = em.createNamedQuery("EmpTareas.registraGrupo");
 			
 			query.setParameter("tarea",tarea_id);
-			query.setParameter("grupo",grupo_id);
+			query.setParameter("grupo",group_id);
 			
-			query.executeUpdate();
+			query.executeUpdate();*/
 			
 			em.getTransaction().commit();
 		} finally{
