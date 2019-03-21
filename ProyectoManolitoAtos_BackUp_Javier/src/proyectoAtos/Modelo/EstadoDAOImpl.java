@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import proyectoAtos.Entidades.Empleados;
 import proyectoAtos.Entidades.Estado;
 
 public class EstadoDAOImpl implements EstadoDAO {

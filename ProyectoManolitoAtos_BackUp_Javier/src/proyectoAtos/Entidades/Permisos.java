@@ -53,5 +53,12 @@ public class Permisos implements Serializable {
 	public Permisos() {
 		
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Permisos [nombre=" + nombre + "]";
+	}
 	
 }

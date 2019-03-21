@@ -1,7 +1,21 @@
 <!doctype html>
+<%@page import="java.util.List"%>
+<%@page import="proyectoAtos.Entidades.Tareas"%>
+<!--
+	Cambios requeridos para esta vista por la tarea 4:
+	  mostrar solo las tareas que le correspondan al empleado concreto que se conecte a la 
+	  aplicación,las cuales incluyen las que NO estén asignadas a ningún empleado en específico.
+	Posibles soluciones:
+	 .-hacer una query nativa con un outer join en una subconsulta,de manera que nos de una lista
+	    de tareas con das igual al del usuario Y además,aquellas tareas sin representación en la 
+	    tabla EmpTareas.Ésto se podría conseguir utilizando la vista Empleados_tareas_view,que ya
+	    fue creada utilizando FULL OUTER JOIN,de manera que contiene tanto las tareas con empleado
+	    asignado,de los cuales guarda los datos que podría ser interesante tener,como nombre o email
+	    (entre otros), como las tareas que no están asignadas a ninguna tarea, teniendo un valor de
+	    null en el resto de columnas.
+ -->
 <html>
 <head>
-<script src="js/Timeout.js"></script>
 <meta charset="utf-8">
 <title>Panel Usuario</title>
 	<style type="text/css">
@@ -109,6 +123,7 @@
 		}
 		
 		#fondoTabla{
+			overflow: scroll;
 			position: relative;
 			background-color: #FFFFFF;
 			margin: 40px;
@@ -149,10 +164,22 @@
 			width: 100%;
 		}
 		
-		
+		#cerrarSesion{
+					
+			heigth: 30px; 					
+			width: 200px;	
+			margin-left: 300px;
+			margin-top: -100px;		
+		}
 	
 	</style>
 </head>
+
+<%
+	//obtener los registros de Empleados
+	List<Tareas> listaTareas = (List<Tareas>) request.getAttribute("LISTARTAREAS");
+%>
+
 <body bgcolor="#ADD5FF">
 	
 	<div id="cabecera">
@@ -160,13 +187,20 @@
 	<div id="marcoInfo">
 		
 		<h3>DATOS USUARIO</h3>
-		<p>DAS:</p><input type="text" value="${das}">
-		<p>NOMBRE:</p><input type="text" value="${nombre}">
-		<p>APELLIDO:</p><input type="text" value="${apellido}">
-		<p>E-MAIL:</p><input type="text" value="${email}">
+		<p>DAS:</p><input type="text" value="${das}" readonly>
+		<p>NOMBRE:</p><input type="text" value="${nombre}" readonly>
+		<p>APELLIDO:</p><input type="text" value="${apellido}" readonly>
+		<p>E-MAIL:</p><input type="text" value="${email}" readonly>
 		
 		<div id="imagenUser">
 			<div id="img"><img width="160px" src="img/User_icon_2.svg.png"></div>
+		</div>
+		
+		<br>
+		<div id="cerrarSesion">
+		<form  action="Controlador" method="post">
+			<button  type="submit" value="logout" name="instruccion">Cerrar sesión</button>
+		</form>
 		</div>
 		
 	
@@ -192,40 +226,21 @@
 			<table width="100%" border="2">
   <tbody>
     <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <th>NOMBRE</th>
+      <th>DESCRIPCION</th>
+      <th>ESTADO</th>
     </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+    
+    <% for(Tareas tare : listaTareas){%>
+
+		 <tr>
+		 	<td><%=tare.getNombre()%></td>
+		 	<td><%=tare.getDescripcion()%></td>
+		 	<td><%=tare.getEstado().getEstado()%></td>
+		 	
+		 
     </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
+    <%} %>
   </tbody>
 </table>
 

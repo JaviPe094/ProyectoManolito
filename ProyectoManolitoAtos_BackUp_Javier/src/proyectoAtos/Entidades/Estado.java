@@ -30,6 +30,11 @@ public class Estado implements Serializable {
 	public Estado() {
 		
 	}
+	
+	public Estado(char est,String descripcion) {
+		this.est=est;
+		this.descripcion=descripcion; 
+	}
 	/**
 	 * @return the estado
 	 */
